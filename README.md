@@ -67,3 +67,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 # gestionale-agriom
 
 https://www.amazon.it/dp/B0856CNGFK/ref=twister_B08DZH7CTQ?_encoding=UTF8&th=1
+
+https://www.amazon.it/Orologio-polso-Uomo-SPAZIO-L4D051-04N/dp/B01EPDJZ3A/ref=sr_1_4?__mk_it_IT=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=II2Q2TCSH9X7&keywords=orologio+spazio+24&qid=1703643449&sprefix=orologio+spazio+2%2Caps%2C312&sr=8-4#customerReviews
