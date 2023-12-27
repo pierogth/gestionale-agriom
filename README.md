@@ -65,3 +65,5 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 # gestionale-agriom
+
+https://www.amazon.it/dp/B0856CNGFK/ref=twister_B08DZH7CTQ?_encoding=UTF8&th=1
