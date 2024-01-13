@@ -19,7 +19,7 @@ class ProductController extends Controller
       'category as Categoria',
       'pieces as N°Pezzi',
     ])->get();
-    return Inertia::render('Dashboard', [
+    return Inertia::render('Lands', [
       'products' => $products,
     ]);
     dd($products);

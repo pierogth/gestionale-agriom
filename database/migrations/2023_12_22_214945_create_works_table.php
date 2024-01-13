@@ -13,6 +13,10 @@ return new class extends Migration {
     Schema::create('works', function (Blueprint $table) {
       $table->id();
       $table->string('where'); /* da collegare a lands??? */
+      $table
+        ->foreignId('land_id')
+        ->nullable()
+        ->constrained();
       $table->text('description')->nullable();
       /* pivot per employee e nro ore di lavoro */
       $table->double('€-hour');

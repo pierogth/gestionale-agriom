@@ -17,6 +17,14 @@ return new class extends Migration {
       $table->text('description')->nullable();
       $table->date('data');
       $table->string('file')->nullable();
+      $table
+        ->foreignId('land_id')
+        ->nullable()
+        ->constrained();
+      $table
+        ->foreignId('employee_id')
+        ->nullable()
+        ->constrained();
       /* chiave ref nullable con land */
       /* chiave ref nullable con employee */
       $table->timestamps();

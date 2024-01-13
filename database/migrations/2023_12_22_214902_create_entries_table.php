@@ -12,10 +12,15 @@ return new class extends Migration {
   {
     Schema::create('entries', function (Blueprint $table) {
       $table->id();
-      /* chiave referenziale a prodotti */
+      /* chiave referenziale pivot a prodotti */
       $table->double('quantity');
       $table->boolean('is_payed');
       /* relazione nullable con rivenditori per scalo del saldo in caso payed */
+      $table
+        ->foreignId('retailer_id')
+        ->nullable()
+        ->constrained();
+      $table->boolean('type')->nullable();
       /* payer tipo enum rivenditori|ecommerce|privato */
       $table->string('payer');
       $table->text('description')->nullable();

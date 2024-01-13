@@ -18,7 +18,7 @@ return new class extends Migration {
       $table->string('um');
       $table->string('coltivation');
       $table->double('workhours')->nullable();
-      /* chiave referenziale su works */
+      /* chiave referenziale pivot su works */
       $table->text('productions')->nullable();
       $table->timestamps();
     });
