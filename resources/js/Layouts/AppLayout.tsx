@@ -59,7 +59,7 @@ export default function AppLayout({
               <div className="flex">
                 {/* <!-- Logo --> */}
                 <div className="flex-shrink-0 flex items-center">
-                  <Link href={route('dashboard')}>
+                  <Link href={route('products.index')}>
                     <ApplicationMark className="block h-9 w-auto" />
                   </Link>
                 </div>
@@ -85,7 +85,7 @@ export default function AppLayout({
                     Collaboratori
                   </NavLink>
                       <NavLink
-                    href={route('dashboard')}
+                    href={"#"}
                     active={route().current('dashboard')}
                   >
                     Bilancio
@@ -318,35 +318,65 @@ export default function AppLayout({
 
           {/* <!-- Responsive Navigation Menu --> */}
           <div
-            className={classNames('sm:hidden', {
+            className={classNames('lg:hidden', {
               block: showingNavigationDropdown,
               hidden: !showingNavigationDropdown,
             })}
           >
             <div className="pt-2 pb-3 space-y-1">
               <ResponsiveNavLink
-                href={route('dashboard')}
-                active={route().current('dashboard')}
+                href={route('products.index')}
+                active={route().current('products.index')}
               >
                 Magazzino
               </ResponsiveNavLink>
               <ResponsiveNavLink
-                href={route('dashboard')}
-                active={route().current('dashboard')}
+                href={route('lands.index')}
+                active={route().current('lands.index')}
               >
                 Terreni
               </ResponsiveNavLink>
               <ResponsiveNavLink
-                href={route('dashboard')}
-                active={route().current('dashboard')}
+                href={route('employees.index')}
+                active={route().current('employees.index')}
               >
-                Dashboard
+                Collaboratori
+              </ResponsiveNavLink>
+              {/*   <ResponsiveNavLink
+                href={route('')}
+                active={route().current('')}
+              >
+                Bilancio
+              </ResponsiveNavLink> */}
+                <ResponsiveNavLink
+                href={route('retailers.index')}
+                active={route().current('retailers.index')}
+              >
+                Rivenditori
+              </ResponsiveNavLink>
+                <ResponsiveNavLink
+                href={route('shops.index')}
+                active={route().current('shops.index')}
+              >
+                Spese
+              </ResponsiveNavLink>
+                <ResponsiveNavLink
+                href={route('entries.index')}
+                active={route().current('entries.index')}
+              >
+                Entrate
+              </ResponsiveNavLink>
+                <ResponsiveNavLink
+                href={route('works.index')}
+                active={route().current('works.index')}
+              >
+                Lavorazioni
               </ResponsiveNavLink>
             </div>
 
             {/* <!-- Responsive Settings Options --> */}
             <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
-              <div className="flex items-center px-4">
+              <div className="flex items-center px-4 sm:hidden">
                 {page.props.jetstream.managesProfilePhotos ? (
                   <div className="flex-shrink-0 mr-3">
                     <img
@@ -367,7 +397,7 @@ export default function AppLayout({
                 </div>
               </div>
 
-              <div className="mt-3 space-y-1">
+              <div className="mt-3 space-y-1 sm:hidden">
                 <ResponsiveNavLink
                   href={route('profile.show')}
                   active={route().current('profile.show')}

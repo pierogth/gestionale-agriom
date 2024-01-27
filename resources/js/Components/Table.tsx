@@ -83,7 +83,20 @@ const [dir, setDir] = useState(-1);
                         </tr>
                     </thead>
                              {props.children}
-                    </table>
+              </table>
+              
+               <div className="row">
+        <div className="col-12 text-center d-flex justify-content-center">
+          <Pagination
+            data={sortedData}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            limit={limit}
+            setLimit={setLimit}
+          />
+        </div>
+              </div>
+              
                 </div>
                 </div>
             </div>

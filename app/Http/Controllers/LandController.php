@@ -14,6 +14,7 @@ class LandController extends Controller
   public function index()
   {
     $products = Land::select([
+      'id',
       'name as Nome',
       'owner as Proprietario',
       'dimension as Superficie',
@@ -22,6 +23,9 @@ class LandController extends Controller
     ])->get();
     return Inertia::render('Lands', [
       'products' => $products,
+      'resource' => 'Terreni',
+      'route' => 'lands',
+      'addname' => 'terreno',
     ]);
   }
 
@@ -31,6 +35,7 @@ class LandController extends Controller
   public function create()
   {
     //
+    return Inertia::render('Lands/Create', []);
   }
 
   /**
@@ -39,6 +44,39 @@ class LandController extends Controller
   public function store(Request $request)
   {
     //
+    $request->validate([
+      'name' => 'required|string|max:255',
+
+      'dimension' => 'required|string',
+
+      'um' => 'required|string|max:255',
+
+      //'description' => 'string',
+
+      'coltivation' => 'required|string',
+
+      'owner' => 'required|string|max:255',
+    ]);
+
+    $product = new Land();
+
+    $product->name = $request->name;
+
+    $product->dimension = $request->dimension;
+
+    $product->um = $request->um;
+
+    //$product->description = $request->description;
+
+    $product->coltivation = $request->coltivation;
+
+    $product->owner = $request->owner;
+
+    $product->save();
+
+    return redirect()
+      ->route('lands.index')
+      ->with('success', 'Land created successfully.');
   }
 
   /**
@@ -55,6 +93,8 @@ class LandController extends Controller
   public function edit(Land $land)
   {
     //
+    $editland = Land::find($land['id']);
+    return Inertia::render('Lands/Edit', ['land' => $editland]);
   }
 
   /**
@@ -70,6 +110,8 @@ class LandController extends Controller
    */
   public function destroy(Land $land)
   {
+    $res = Land::where('id', $land->id)->delete();
     //
+    return $this->index();
   }
 }

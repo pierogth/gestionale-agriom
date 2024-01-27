@@ -20,6 +20,7 @@ return new class extends Migration {
       $table->double('workhours')->nullable();
       /* chiave referenziale pivot su works */
       $table->text('productions')->nullable();
+      $table->text('description')->nullable();
       $table->timestamps();
     });
   }

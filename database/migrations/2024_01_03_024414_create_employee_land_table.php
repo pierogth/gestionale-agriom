@@ -11,8 +11,14 @@ return new class extends Migration {
   public function up(): void
   {
     Schema::create('employee_land', function (Blueprint $table) {
-      $table->foreignId('employee_id')->constrained();
-      $table->foreignId('land_id')->constrained();
+      $table
+        ->foreignId('employee_id')
+        ->constrained()
+        ->onDelete('cascade');
+      $table
+        ->foreignId('land_id')
+        ->constrained()
+        ->onDelete('cascade');
     });
   }
 

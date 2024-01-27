@@ -1,13 +1,5 @@
 import React, { ReactNode, useEffect, useState } from 'react';
-import {
-  Pager,
-  PagerItem,
-  PagerLink,
-  Icon,
-  Table,
-  Button,
-  Input,
-} from 'design-react-kit';
+
 
 type PropsWithChildren<P> = P & { children?: ReactNode };
 
@@ -55,26 +47,9 @@ export default function Pagination(props: PropsWithChildren<Props>) {
 
   return (
     <div className={'container d-flex justify-content-center mt-2 mb-5 '}>
-      <Button
-        className={'pagination-button mr-1'}
-        onClick={() => props.setCurrentPage(1)}
-        size={'sm'}
-        color={'primary'}
-        disabled={props.currentPage === 1 ? true : false}
-      >
-        &#60;&#60;
-      </Button>
-      <Button
-        className={'pagination-button'}
-        onClick={() => changePage(props.currentPage - parseInt('1'))}
-        size={'sm'}
-        color={'primary'}
-        disabled={props.currentPage === 1 ? true : false}
-      >
-        &#60;
-      </Button>
+   
 
-      <div className={'pagination-text ml-4'}>pagina</div>
+      <span style={{ "color": "white" }}> pagina </span>
       <input
         type={'number'}
         step={1}
@@ -82,25 +57,9 @@ export default function Pagination(props: PropsWithChildren<Props>) {
         onChange={e => changePage(e.target.value)}
         value={props.currentPage}
       />
-      <div className={'pagination-text'}> di {pages}</div>
-      <Button
-        className={'pagination-button mr-1'}
-        onClick={() => changePage(props.currentPage + parseInt('1'))}
-        disabled={props.currentPage < pages ? false : true}
-        size={'sm'}
-        color={'primary'}
-      >
-        &#62;
-      </Button>
-      <Button
-        className={'pagination-button'}
-        onClick={() => props.setCurrentPage(pages)}
-        disabled={props.currentPage < pages ? false : true}
-        size={'sm'}
-        color={'primary'}
-      >
-        &#62;&#62;
-      </Button>
+      <span style={{ "color": "white" }}> di {pages}</span>
+  
+     
     </div>
   );
 }

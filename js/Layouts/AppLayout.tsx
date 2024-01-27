@@ -61,7 +61,7 @@ export default function AppLayout({
               <div className="flex">
                 {/* <!-- Logo --> */}
                 <div className="flex-shrink-0 flex items-center">
-                  <Link href={route('dashboard')}>
+                  <Link href={"/products"}>
                     <ApplicationMark className="block h-9 w-auto" />
                   </Link>
                 </div>

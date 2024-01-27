@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Work;
+use App\Models\WorkEmployee;
+use App\Models\WorkLand;
+use App\Models\EmployeeLand;
+
+use App\Models\Employee;
+use App\Models\Land;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -14,14 +20,18 @@ class WorkController extends Controller
   public function index()
   {
     $products = Work::select([
+      'id',
       'where as Dove',
       /* TODO collaboratore/i */
       /* TODO ore di lavoro */
-      '€-hour as €-ora',
+      'ehour as €-ora',
       'data as Data',
     ])->get();
     return Inertia::render('Lands', [
       'products' => $products,
+      'resource' => 'Lavorazioni',
+      'route' => 'works',
+      'addname' => 'lavorazione',
     ]);
   }
 
@@ -30,6 +40,13 @@ class WorkController extends Controller
    */
   public function create()
   {
+    $employees = Employee::all();
+    $lands = Land::all();
+    return Inertia::render('Work/Create', [
+      'employees' => $employees,
+      'lands' => $lands,
+    ]);
+
     //
   }
 
@@ -39,6 +56,61 @@ class WorkController extends Controller
   public function store(Request $request)
   {
     //
+    $request->validate([
+      'where' => 'required|string|max:255',
+
+      'ehour' => 'required|decimal:0,5',
+
+      'workhours' => 'required|decimal:0,5',
+
+      'description' => 'required|string',
+
+      'data' => 'required|date',
+
+      //'file' => 'required|file',
+    ]);
+
+    $product = new Work();
+
+    $land = Land::find($request->where);
+
+    $product->where = $land->name;
+
+    $product->data = $request->data;
+
+    $product->ehour = $request->ehour;
+
+    $product->land_id = $request->where;
+
+    $product->workhours = $request->workhours;
+
+    $product->description = $request->description;
+
+    $product->save();
+
+    if (!empty($request->input('selectedEmployees'))) {
+      foreach ($request->input('selectedEmployees') as $mioprod) {
+        $myprod = Employee::find($mioprod['id']);
+        $myprod->workhours = $myprod->workhours + $mioprod['quantity'];
+        $myprod->credit = $myprod->workhours * $myprod->ehour;
+        $myprod->save();
+        WorkEmployee::create([
+          'work_id' => $product->id,
+          'employee_id' => $mioprod['id'],
+          'nrhours' => $mioprod['quantity'],
+        ]);
+        EmployeeLand::firstOrCreate([
+          'employee_id' => $mioprod['id'],
+          'land_id' => $request->where,
+        ]);
+      }
+    }
+
+    WorkLand::create(['work_id' => $product->id, 'land_id' => $request->where]);
+
+    return redirect()
+      ->route('retailers.index')
+      ->with('success', 'Shop created successfully.');
   }
 
   /**
@@ -54,7 +126,15 @@ class WorkController extends Controller
    */
   public function edit(Work $work)
   {
-    //
+    $editwork = Work::find($work->id);
+    //qua prendo i prodotti sfusi per la tendina
+    $employees = Employee::all();
+    $lands = Land::all();
+    return Inertia::render('Work/Edit', [
+      'work' => $editwork,
+      'employees' => $employees,
+      'lands' => $lands,
+    ]);
   }
 
   /**
@@ -62,7 +142,53 @@ class WorkController extends Controller
    */
   public function update(Request $request, Work $work)
   {
-    //
+    $request->validate([
+      'where' => 'required|string|max:255',
+
+      'ehour' => 'required|decimal:0,5',
+
+      'workhours' => 'required|decimal:0,5',
+
+      'description' => 'required|string',
+
+      'data' => 'required|date',
+
+      //'file' => 'required|file',
+    ]);
+
+    $product = Work::find($work['id']);
+
+    $land = Land::find($request->where);
+
+    $product->where = $land->name;
+
+    $product->data = $request->data;
+
+    $product->ehour = $request->ehour;
+
+    $product->workhours = $request->workhours;
+
+    $product->description = $request->description;
+
+    $product->save();
+
+    if (!empty($request->input('selectedEmployees'))) {
+      foreach ($request->input('selectedEmployees') as $mioprod) {
+        $myprod = Employee::find($mioprod['id']);
+        $myprod->workhours = $myprod->workhours + $mioprod['quantity'];
+        $myprod->credit = $myprod->workhours * $myprod->ehour;
+        $myprod->save();
+        WorkEmployee::create([
+          'work_id' => $product->id,
+          'employee_id' => $mioprod['id'],
+          'nrhours' => $mioprod['quantity'],
+        ]);
+        EmployeeLand::firstOrCreate([
+          'employee_id' => $mioprod['id'],
+          'land_id' => $request->where,
+        ]);
+      }
+    }
   }
 
   /**
@@ -70,6 +196,8 @@ class WorkController extends Controller
    */
   public function destroy(Work $work)
   {
+    $res = Work::where('id', $work->id)->delete();
     //
+    return $this->index();
   }
 }

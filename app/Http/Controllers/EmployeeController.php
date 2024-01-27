@@ -14,15 +14,19 @@ class EmployeeController extends Controller
   public function index()
   {
     $products = Employee::select([
+      'id',
       'namesurname as Nome',
       'category as Categoria',
       'credit as Credito',
       'shops as Spese',
       'workhours as N°ore Lavoro',
-      '€-hour as €-ora',
+      'ehour as €-ora',
     ])->get();
     return Inertia::render('Lands', [
       'products' => $products,
+      'resource' => 'Collaboratori',
+      'route' => 'employees',
+      'addname' => 'Collaboratore',
     ]);
   }
 
@@ -32,6 +36,7 @@ class EmployeeController extends Controller
   public function create()
   {
     //
+    return Inertia::render('Employee/Create', []);
   }
 
   /**
@@ -40,6 +45,41 @@ class EmployeeController extends Controller
   public function store(Request $request)
   {
     //
+    $request->validate([
+      'namesurname' => 'required|string|max:255',
+
+      'category' => 'required|string',
+
+      'credit' => 'required|decimal:0,5',
+
+      'shops' => 'required|decimal:0,5',
+
+      'workhours' => 'required|decimal:0,5',
+
+      'ehours' => 'required|decimal:0,5',
+    ]);
+
+    $product = new Employee();
+
+    $product->namesurname = $request->namesurname;
+
+    $product->category = $request->category;
+
+    $product->credit = $request->credit;
+
+    //$product->description = $request->description;
+
+    $product->shops = $request->shops;
+
+    $product->workhours = $request->workhours;
+
+    $product->ehour = $request->ehours;
+
+    $product->save();
+
+    return redirect()
+      ->route('employees.index')
+      ->with('success', 'Employee created successfully.');
   }
 
   /**
@@ -56,6 +96,8 @@ class EmployeeController extends Controller
   public function edit(Employee $employee)
   {
     //
+    $editemployee = Employee::find($employee['id']);
+    return Inertia::render('Employee/Edit', ['employee' => $editemployee]);
   }
 
   /**
@@ -71,6 +113,8 @@ class EmployeeController extends Controller
    */
   public function destroy(Employee $employee)
   {
+    $res = Employee::where('id', $employee->id)->delete();
     //
+    return $this->index();
   }
 }

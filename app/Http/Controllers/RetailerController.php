@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Retailer;
+use App\Models\Product;
+
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -14,6 +16,7 @@ class RetailerController extends Controller
   public function index()
   {
     $products = Retailer::select([
+      'id',
       'name as Nome',
       'place as Luogo',
       /*'type as Tipologia',*/
@@ -21,6 +24,9 @@ class RetailerController extends Controller
     ])->get();
     return Inertia::render('Lands', [
       'products' => $products,
+      'resource' => 'Rivenditori',
+      'route' => 'retailers',
+      'addname' => 'rivenditore',
     ]);
   }
 
@@ -30,6 +36,8 @@ class RetailerController extends Controller
   public function create()
   {
     //
+    $products = Product::all();
+    return Inertia::render('Retailer/Create', ['products' => $products]);
   }
 
   /**
@@ -38,6 +46,35 @@ class RetailerController extends Controller
   public function store(Request $request)
   {
     //
+    $request->validate([
+      'name' => 'required|string|max:255',
+
+      'place' => 'required|string',
+
+      'balance' => 'required|decimal:0,5',
+    ]);
+
+    $product = new Retailer();
+
+    $product->name = $request->name;
+
+    $product->place = $request->place;
+
+    $product->balance = $request->balance;
+
+    if (!empty($request->input('selectedProducts'))) {
+      foreach ($request->input('selectedProducts') as $mioprod) {
+        $myprod = Product::find($mioprod['id']);
+        $myprod->quantity = $myprod->quantity - $mioprod['quantity'];
+        $myprod->save();
+      }
+    }
+
+    $product->save();
+
+    return redirect()
+      ->route('retailers.index')
+      ->with('success', 'Retailer created successfully.');
   }
 
   /**
@@ -54,6 +91,12 @@ class RetailerController extends Controller
   public function edit(Retailer $retailer)
   {
     //
+    $products = Product::all();
+    $editretailer = Retailer::find($retailer['id']);
+    return Inertia::render('Retailer/Edit', [
+      'retailer' => $editretailer,
+      'products' => $products,
+    ]);
   }
 
   /**
@@ -69,6 +112,8 @@ class RetailerController extends Controller
    */
   public function destroy(Retailer $retailer)
   {
+    $res = Retailer::where('id', $retailer->id)->delete();
     //
+    return $this->index();
   }
 }

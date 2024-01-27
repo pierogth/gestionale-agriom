@@ -19,7 +19,8 @@ return new class extends Migration {
         ->constrained();
       $table->text('description')->nullable();
       /* pivot per employee e nro ore di lavoro */
-      $table->double('€-hour');
+      $table->double('ehour');
+      $table->double('workhours');
       $table->date('data');
       $table->timestamps();
     });

@@ -14,15 +14,20 @@ class ProductController extends Controller
   public function index()
   {
     $products = Product::select([
+      'id',
       'name as Nome',
       'quantity as Quantità',
       'category as Categoria',
       'pieces as N°Pezzi',
     ])->get();
+
     return Inertia::render('Lands', [
       'products' => $products,
+      'resource' => 'Magazzino',
+      'addname' => 'Prodotto',
+      'route' => 'products',
     ]);
-    dd($products);
+    //dd($products);
   }
 
   /**
@@ -30,7 +35,9 @@ class ProductController extends Controller
    */
   public function create()
   {
-    //
+    //qua prendo i prodotti sfusi per la tendina
+    $products = Product::where('type', 1)->get();
+    return Inertia::render('Products/Create', ['products' => $products]);
   }
 
   /**
@@ -38,6 +45,70 @@ class ProductController extends Controller
    */
   public function store(Request $request)
   {
+    //dd($request->input('name'));
+    $request->validate([
+      'name' => 'required|string|max:255',
+
+      'quantity' => 'required|numeric',
+
+      'um' => 'required|string|max:255',
+
+      'category' => 'required|string|max:255',
+
+      'pieces' => 'required|numeric',
+
+      // 'description' => 'string',
+
+      'lot' => 'required|string',
+
+      'type' => 'required|boolean',
+
+      // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+
+    $product = new Product();
+
+    $product->name = $request->name;
+
+    $product->quantity = $request->quantity;
+
+    $product->um = $request->um;
+
+    $product->category = $request->category;
+
+    $product->pieces = $request->pieces;
+
+    $product->description = $request->description;
+
+    $product->lot = $request->lot;
+
+    $product->type = $request->type;
+
+    if ($request->hasFile('image')) {
+      $image = $request->file('image');
+
+      $name = time() . '.' . $image->getClientOriginalExtension();
+
+      $destinationPath = public_path('/images');
+
+      $image->move($destinationPath, $name);
+
+      $product->image = $name;
+    }
+
+    if ($request->input('selectedProduct') != '') {
+      $sfuso = Product::find($request->input('selectedProduct'));
+      $sfuso->quantity =
+        $sfuso->quantity - $product->quantity * $product->pieces;
+      $sfuso->save();
+    }
+
+    $product->save();
+
+    return redirect()
+      ->route('products.index')
+      ->with('success', 'Product created successfully.');
+
     //
   }
 
@@ -46,7 +117,12 @@ class ProductController extends Controller
    */
   public function show(Product $product)
   {
-    //
+    return Inertia::render('Products/Show', [
+      'product' => $product,
+      /*   'resource' => 'Magazzino',
+      'addname' => 'Prodotto',
+      'route' => 'products', */
+    ]);
   }
 
   /**
@@ -54,7 +130,15 @@ class ProductController extends Controller
    */
   public function edit(Product $product)
   {
-    //
+    // dd($product->id);
+
+    $editproduct = Product::find($product->id);
+    //qua prendo i prodotti sfusi per la tendina
+    $products = Product::where('type', 1)->get();
+    return Inertia::render('Products/Edit', [
+      'product' => $editproduct,
+      'products' => $products,
+    ]);
   }
 
   /**
@@ -63,6 +147,68 @@ class ProductController extends Controller
   public function update(Request $request, Product $product)
   {
     //
+    $request->validate([
+      'name' => 'required|string|max:255',
+
+      'quantity' => 'required|numeric',
+
+      'um' => 'required|string|max:255',
+
+      'category' => 'required|string|max:255',
+
+      'pieces' => 'required|numeric',
+
+      // 'description' => 'string',
+
+      'lot' => 'required|string',
+
+      'type' => 'required|boolean',
+
+      // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+
+    $product = Product::find($product['id']);
+
+    $product->name = $request->name;
+
+    $product->quantity = $request->quantity;
+
+    $product->um = $request->um;
+
+    $product->category = $request->category;
+
+    $product->pieces = $request->pieces;
+
+    $product->description = $request->description;
+
+    $product->lot = $request->lot;
+
+    $product->type = $request->type;
+
+    if ($request->hasFile('image')) {
+      $image = $request->file('image');
+
+      $name = time() . '.' . $image->getClientOriginalExtension();
+
+      $destinationPath = public_path('/images');
+
+      $image->move($destinationPath, $name);
+
+      $product->image = $name;
+    }
+
+    if ($request->input('selectedProduct') != '') {
+      $sfuso = Product::find($request->input('selectedProduct'));
+      $sfuso->quantity =
+        $sfuso->quantity - $product->quantity * $product->pieces;
+      $sfuso->save();
+    }
+
+    $product->save();
+
+    return redirect()
+      ->route('products.index')
+      ->with('success', 'Product created successfully.');
   }
 
   /**
@@ -70,6 +216,9 @@ class ProductController extends Controller
    */
   public function destroy(Product $product)
   {
+    //dd($product);
+    $res = Product::where('id', $product->id)->delete();
     //
+    return $this->index();
   }
 }

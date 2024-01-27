@@ -1,13 +1,16 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Welcome from '@/Components/Welcome';
 import AppLayout from '@/Layouts/AppLayout';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { SortableTable } from '@/Components/Table';
 import TableBody from '@/Components/TableBody';
+import { router } from '@inertiajs/core';
+import useRoute from '@/Hooks/useRoute';
 
 
-export default function Lands({ products }) {
-  console.log(products)
+
+export default function Lands({ products, resource, route, addname }) {
+  console.log(resource)
   {console.log("------>>>>>"+Object.keys(products[0]))}
   const [columns, setColumns] = useState([]);
     const [searchInput, setSearchInput] = useState('');
@@ -18,13 +21,19 @@ export default function Lands({ products }) {
     const [actions, setActions] = useState([]);
   const [loading, setLoading] = useState(true);
      const [isFocused, toggleFocus] = useState(false);
-
+const router = useRoute();
    const toggleFocusLabel = () => toggleFocus(true);
   const toggleBlurLabel = (e: any) => {
     if (e.target.value === '') {
       toggleFocus(!isFocused);
     }
   };
+
+  useEffect(() => {
+    console.log(products);
+    setDataFilterOrderAndPaginate(products);
+
+  }, [products])
   
   return (
     <AppLayout
@@ -32,9 +41,9 @@ export default function Lands({ products }) {
       renderHeader={() => (<><div className="flex justify-between">
         <h2></h2>
         <h2 className="font-semibold text-xl text-center text-gray-800 dark:text-gray-200 leading-tight">
-          Terreni
+          {resource}
         </h2>
-        <PrimaryButton className='flex-end'>Aggiungi Terreno</PrimaryButton>
+        <PrimaryButton className='flex-end' ><a href={router(route+'.create')}>Aggiungi {addname}</a></PrimaryButton>
       </div></>
       )}
     >
@@ -64,7 +73,8 @@ export default function Lands({ products }) {
               actions={actions.length > 0 ? true : false}>
               <TableBody   columns={Object.keys(products[0])}
                   data={dataFilterOrderAndPaginate}
-                  actions={[]}>
+                actions={[]}
+              routes={route}>
 
               </TableBody>
               </SortableTable>

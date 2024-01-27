@@ -11,8 +11,14 @@ return new class extends Migration {
   public function up(): void
   {
     Schema::create('work_employee', function (Blueprint $table) {
-      $table->foreignId('work_id')->constrained();
-      $table->foreignId('employee_id')->constrained();
+      $table
+        ->foreignId('work_id')
+        ->constrained()
+        ->onDelete('cascade');
+      $table
+        ->foreignId('employee_id')
+        ->constrained()
+        ->onDelete('cascade');
       $table->double('nrhours');
     });
   }

@@ -18,7 +18,7 @@ return new class extends Migration {
       $table->double('shops');
       $table->double('workhours');
       /* chiave referenziale workplaces su lands */
-      $table->double('€-hour');
+      $table->double('ehour');
       /* acconti conviene creare la pivot */
       $table->timestamps();
     });
