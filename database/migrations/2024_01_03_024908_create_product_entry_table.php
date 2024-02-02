@@ -19,6 +19,7 @@ return new class extends Migration {
         ->foreignId('entry_id')
         ->constrained()
         ->onDelete('cascade');
+      $table->double('quantity');
     });
   }
 

@@ -7,5 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Retailer extends Model
 {
-    use HasFactory;
+  use HasFactory;
+
+  public function products()
+  {
+    return $this->belongsToMany(Product::class, 'product_retail')->withPivot(
+      'product_id',
+      'retailer_id'
+    );
+  }
 }

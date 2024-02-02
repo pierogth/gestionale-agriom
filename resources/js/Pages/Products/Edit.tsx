@@ -78,13 +78,13 @@ export default function App({ product, products }) {
       ...prevProps,
       image: event.target.files[0],
     }));
-   console.log(formData);
+   console.log(formData); 
  };
 
  const handleSubmit = (event) => {
     event.preventDefault();
   
-   form.put(route('products.update',product.id), {
+   form.post(route('products.update',product.id), {
       onError: (e: any) => {
        setErrors(e);
        console.log("ERRORE---->"+e)
@@ -100,8 +100,8 @@ export default function App({ product, products }) {
 
   return (
    
-    <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
-        <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+    <div style={{backgroundColor:"#111827"}} className="dark:bg-grey-900 min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+      <div className="dark:bg-grey-900 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
 
                 <button
 
@@ -119,8 +119,8 @@ export default function App({ product, products }) {
 
               </div>
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-light-blue-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
-        <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+        <div className="dark:bg-grey-900 absolute inset-0 bg-gradient-to-r from-cyan-400 to-light-blue-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
+        <div className="dark:bg-grey-900 relative px-4 py-10 shadow-lg sm:rounded-3xl sm:p-20">
          <form onSubmit={handleSubmit}>
             <div className="mb-4">
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -45,6 +46,8 @@ class ProductController extends Controller
    */
   public function store(Request $request)
   {
+    //dd($request);
+
     //dd($request->input('name'));
     $request->validate([
       'name' => 'required|string|max:255',
@@ -55,7 +58,7 @@ class ProductController extends Controller
 
       'category' => 'required|string|max:255',
 
-      'pieces' => 'required|numeric',
+      //'pieces' => 'required|numeric',
 
       // 'description' => 'string',
 
@@ -89,9 +92,11 @@ class ProductController extends Controller
 
       $name = time() . '.' . $image->getClientOriginalExtension();
 
-      $destinationPath = public_path('/images');
+      // $destinationPath = public_path('/images');
 
-      $image->move($destinationPath, $name);
+      Storage::disk('local')->put($name, 'Images');
+
+      //$image->move($destinationPath, $name);
 
       $product->image = $name;
     }
@@ -147,6 +152,7 @@ class ProductController extends Controller
   public function update(Request $request, Product $product)
   {
     //
+    //dd($request);
     $request->validate([
       'name' => 'required|string|max:255',
 
@@ -156,7 +162,7 @@ class ProductController extends Controller
 
       'category' => 'required|string|max:255',
 
-      'pieces' => 'required|numeric',
+      //'pieces' => 'required|numeric',
 
       // 'description' => 'string',
 
@@ -190,7 +196,9 @@ class ProductController extends Controller
 
       $name = time() . '.' . $image->getClientOriginalExtension();
 
-      $destinationPath = public_path('/images');
+      $destinationPath = storage_path('app/images');
+
+      //Storage::disk('local')->put($name, 'Images');
 
       $image->move($destinationPath, $name);
 

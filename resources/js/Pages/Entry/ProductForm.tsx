@@ -37,7 +37,7 @@ const ProductForm = ({ products,selectedProducts, setSelectedProducts  }) => {
         {product.id && (
           <div>
             <label htmlFor={`quantity-${index}`} className="block text-sm font-medium text-gray-700">
-              Quantity of {product.name}
+              Quantità di {product.name}
             </label>
             <input
               type="number"
@@ -63,7 +63,7 @@ const ProductForm = ({ products,selectedProducts, setSelectedProducts  }) => {
             onClick={handleAddProduct}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
-            Add Product
+            Aggiungi prodotto
           </button>
         </div>
       </div>

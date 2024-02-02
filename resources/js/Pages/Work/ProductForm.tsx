@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 const ProductForm = ({ products,selectedProducts, setSelectedProducts  }) => {
 
+  console.log(selectedProducts)
+  console.log(products)
   const handleSelectChange = (index, e) => {
     const selectedProduct = products.find(p => p.id === parseInt(e.target.value));
     const updatedProducts = [...selectedProducts];
@@ -29,8 +31,8 @@ const ProductForm = ({ products,selectedProducts, setSelectedProducts  }) => {
         >
           <option value="">Scegli collaboratore</option>
           {products.map((p) => (
-            <option key={p.id} value={p.id}>
-              {p.namesurname}
+            <option key={p.id} value={p.id} selected={p.id===product.employee_id ? true : false}>
+              {p.namesurname}{ console.log(p.id === product.employee_id) }
             </option>
           ))}
         </select>

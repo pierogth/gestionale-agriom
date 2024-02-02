@@ -103,6 +103,39 @@ class LandController extends Controller
   public function update(Request $request, Land $land)
   {
     //
+    $request->validate([
+      'name' => 'required|string|max:255',
+
+      'dimension' => 'required|string',
+
+      'um' => 'required|string|max:255',
+
+      //'description' => 'string',
+
+      'coltivation' => 'required|string',
+
+      'owner' => 'required|string|max:255',
+    ]);
+
+    $product = Land::find($land['id']);
+
+    $product->name = $request->name;
+
+    $product->dimension = $request->dimension;
+
+    $product->um = $request->um;
+
+    //$product->description = $request->description;
+
+    $product->coltivation = $request->coltivation;
+
+    $product->owner = $request->owner;
+
+    $product->save();
+
+    return redirect()
+      ->route('lands.index')
+      ->with('success', 'Land updated successfully.');
   }
 
   /**

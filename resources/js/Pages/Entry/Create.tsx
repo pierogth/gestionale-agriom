@@ -91,6 +91,14 @@ export default function App({ products, retailers }) {
     }));
  };
 
+  const handleFileChange = (event) => {
+  console.log(event.target.files[0]);
+    setFormData((prevProps) => ({
+      ...prevProps,
+      file: event.target.files[0],
+    }));
+   console.log(formData);  
+ };
 
 
  const handleSubmit = (event) => {
@@ -111,13 +119,30 @@ export default function App({ products, retailers }) {
  };
 
  return (
-    <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+   <div style={{backgroundColor:"#111827"}} className="dark:bg-grey-900 min-h-screen py-6 flex flex-col justify-center sm:py-12">
+      <div className="dark:bg-grey-900 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+
+                <button
+
+                  type="button"
+
+                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+
+                  onClick={() => router.visit(route('entries.index'))}
+
+                >
+
+                  X
+
+                </button>
+
+              </div>
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-light-blue-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
-        <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+        <div className="dark:bg-grey-900 absolute inset-0 bg-gradient-to-r from-cyan-400 to-light-blue-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
+        <div className="dark:bg-grey-900 relative px-4 py-10 shadow-lg sm:rounded-3xl sm:p-20">
           <form onSubmit={handleSubmit}>
             <div className="mb-5">
-              <label htmlFor="type" className="block mb-2 text-sm font-medium text-gray-600">€</label>
+              <label htmlFor="type" className="block mb-2 text-sm font-medium dark:text-black-600">€</label>
               <input
                 type="number"
                 name="quantity"
@@ -127,7 +152,7 @@ export default function App({ products, retailers }) {
               />
             {errors.quantity !== null ? <small style={{color:"red"}}>{errors.quantity}</small>: ''}
            </div>
-                 <div className="mb-5">      <label htmlFor="retailSelect" className="block mb-2 text-sm font-medium text-gray-600">Rivenditore</label>
+                 <div className="mb-5">      <label htmlFor="retailSelect" className="block mb-2 text-sm font-medium text-black-600">Rivenditore</label>
 
            <select
 
@@ -137,7 +162,7 @@ export default function App({ products, retailers }) {
 
           onChange={(e) => setSelectedRetail(e.target.value)}
 
-          className="w-full py-2 pl-3 pr-8 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="w-full py-2 pl-3 pr-8 text-gray-700 dark:bg-grey-900 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 
         >      {retailers.map((retailer) => (
 
@@ -151,7 +176,7 @@ export default function App({ products, retailers }) {
 
             </select></div>  
             <div className="mb-5">
-              <label htmlFor="place" className="block mb-2 text-sm font-medium text-gray-600">Tipologia</label>
+              <label htmlFor="place" className="block mb-2 text-sm font-medium text-black-600">Tipologia</label>
               <input
                 type="text"
                 name="type"
@@ -165,9 +190,9 @@ export default function App({ products, retailers }) {
                      
                      <div className="mb-4">
 
-        <label htmlFor="is_payed" className="block text-gray-700 font-bold mb-2">
+        <label htmlFor="is_payed" className="block text-black-700 font-bold mb-2">
 
-          Is paid?
+          Pagato?
 
         </label>
 
@@ -193,9 +218,9 @@ export default function App({ products, retailers }) {
 
             />
 
-            <label htmlFor="is_payed_true" className="block text-gray-700 font-bold">
+            <label htmlFor="is_payed_true" className="block text-black-700 font-bold">
 
-              Yes
+              Si
 
             </label>
 
@@ -221,7 +246,7 @@ export default function App({ products, retailers }) {
 
             />
 
-            <label htmlFor="is_payed_false" className="block text-gray-700 font-bold">
+            <label htmlFor="is_payed_false" className="block text-black-700 font-bold">
 
               No
 
@@ -234,7 +259,7 @@ export default function App({ products, retailers }) {
       </div>
                      {/* ... include the other fields in a similar manner ... */}
                          <div className="mb-5">
-              <label htmlFor="balance" className="block mb-2 text-sm font-medium text-gray-600">Descrizione</label>
+              <label htmlFor="balance" className="block mb-2 text-sm font-medium text-black-600">Descrizione</label>
               <input
                 type="text"
                 name="description"
@@ -246,7 +271,7 @@ export default function App({ products, retailers }) {
                      </div>
                     {/* ... include the other fields in a similar manner ... */}
                          <div className="mb-5">
-              <label htmlFor="data" className="block mb-2 text-sm font-medium text-gray-600">Data</label>
+              <label htmlFor="data" className="block mb-2 text-sm font-medium text-black-600">Data</label>
               <input
                 type="date"
                 name="data"
@@ -257,7 +282,7 @@ export default function App({ products, retailers }) {
           {errors.data !== null ? <small style={{color:"red"}}>{errors.data}</small>: ''}
                      </div>
                          <div className="mb-5">
-              <label htmlFor="data" className="block mb-2 text-sm font-medium text-gray-600">Pagante</label>
+              <label htmlFor="data" className="block mb-2 text-sm font-medium text-black-600">Pagante</label>
               <input
                 type="text"
                 name="payer"
@@ -268,7 +293,7 @@ export default function App({ products, retailers }) {
           {errors.payer !== null ? <small style={{color:"red"}}>{errors.payer}</small>: ''}
                      </div>
                          <div className="mb-5">
-              <label htmlFor="data" className="block mb-2 text-sm font-medium text-gray-600">Tipo di pagamento</label>
+              <label htmlFor="data" className="block mb-2 text-sm font-medium text-black-600">Tipo di pagamento</label>
               <input
                 type="text"
                 name="payment_type"
@@ -280,12 +305,11 @@ export default function App({ products, retailers }) {
                      </div>
                             {/* ... include the other fields in a similar manner ... */}
                          <div className="mb-5">
-              <label htmlFor="file" className="block mb-2 text-sm font-medium text-gray-600">File</label>
+              <label htmlFor="file" className="block mb-2 text-sm font-medium text-black-600">File</label>
               <input
                 type="file"
                 name="file"
-                value={formData.file}
-                onChange={handleInputChange}
+                onChange={handleFileChange}
                 className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
               />
           {errors.file !== null ? <small style={{color:"red"}}>{errors.file}</small>: ''}

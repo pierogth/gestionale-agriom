@@ -106,6 +106,41 @@ class EmployeeController extends Controller
   public function update(Request $request, Employee $employee)
   {
     //
+    $request->validate([
+      'namesurname' => 'required|string|max:255',
+
+      'category' => 'required|string',
+
+      'credit' => 'required|decimal:0,5',
+
+      'shops' => 'required|decimal:0,5',
+
+      'workhours' => 'required|decimal:0,5',
+
+      'ehour' => 'required|decimal:0,5',
+    ]);
+
+    $product = Employee::find($employee['id']);
+
+    $product->namesurname = $request->namesurname;
+
+    $product->category = $request->category;
+
+    $product->credit = $request->credit;
+
+    //$product->description = $request->description;
+
+    $product->shops = $request->shops;
+
+    $product->workhours = $request->workhours;
+
+    $product->ehour = $request->ehour;
+
+    $product->save();
+
+    return redirect()
+      ->route('employees.index')
+      ->with('success', 'Employee updated successfully.');
   }
 
   /**

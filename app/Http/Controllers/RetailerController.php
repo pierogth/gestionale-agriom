@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Retailer;
 use App\Models\Product;
+use App\Models\ProductRetail;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -62,15 +63,21 @@ class RetailerController extends Controller
 
     $product->balance = $request->balance;
 
+    $product->save();
+
     if (!empty($request->input('selectedProducts'))) {
       foreach ($request->input('selectedProducts') as $mioprod) {
         $myprod = Product::find($mioprod['id']);
         $myprod->quantity = $myprod->quantity - $mioprod['quantity'];
         $myprod->save();
+        //creo i record nella pivot
+        ProductEntry::create([
+          'product_id' => $mioprod['id'],
+          'entry_id' => $product->id,
+          'quantity' => $mioprod['quantity'],
+        ]);
       }
     }
-
-    $product->save();
 
     return redirect()
       ->route('retailers.index')
@@ -93,9 +100,17 @@ class RetailerController extends Controller
     //
     $products = Product::all();
     $editretailer = Retailer::find($retailer['id']);
+    $selectedProducts = ProductRetail::select(
+      'product_id as id',
+      'retailer_id',
+      'quantity'
+    )
+      ->where('retailer_id', $retailer['id'])
+      ->get();
     return Inertia::render('Retailer/Edit', [
       'retailer' => $editretailer,
       'products' => $products,
+      'selectProducts' => $selectedProducts,
     ]);
   }
 
@@ -105,6 +120,44 @@ class RetailerController extends Controller
   public function update(Request $request, Retailer $retailer)
   {
     //
+    $request->validate([
+      'name' => 'required|string|max:255',
+
+      'place' => 'required|string',
+
+      'balance' => 'required|decimal:0,5',
+    ]);
+
+    $product = Retailer::find($retailer['id']);
+
+    $product->name = $request->name;
+
+    $product->place = $request->place;
+
+    $product->balance = $request->balance;
+
+    if (!empty($request->input('selectedProducts'))) {
+      $mySync = [];
+      foreach ($request->input('selectedProducts') as $mioprod) {
+        $myprod = Product::find($mioprod['id']);
+        $myprod->quantity = $myprod->quantity - $mioprod['quantity'];
+        $myprod->save();
+        //aggiorno i record nella pivot
+        $mySync += [$mioprod['id'] => ['quantity' => $mioprod['quantity']]];
+        $mySync[$mioprod['id']] += ['quantity' => $mioprod['quantity']];
+
+        $product->products()->updateExistingPivot($mioprod['id'], [
+          'quantity' => $mioprod['quantity'],
+        ]);
+      }
+      $product->products()->sync($mySync);
+    }
+
+    $product->save();
+
+    return redirect()
+      ->route('retailers.index')
+      ->with('success', 'Retailer updated successfully.');
   }
 
   /**

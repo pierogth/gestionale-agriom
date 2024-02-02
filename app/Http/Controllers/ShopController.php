@@ -67,9 +67,26 @@ class ShopController extends Controller
 
     $product->data = $request->data;
 
+    $product->land_id = $request->selectedLands[0]['id'];
+
+    $product->employee_id = $request->selectedEmployees[0]['id'];
+
     $product->amount = $request->amount;
 
     $product->description = $request->description;
+
+    if ($request->hasFile('file')) {
+      $file = $request->file('file');
+
+      $name = time() . '.' . $file->getClientOriginalExtension();
+
+      //$destinationPath = public_path('/files');
+      $destinationPath = storage_path('app/files');
+
+      $file->move($destinationPath, $name);
+
+      $product->file = $name;
+    }
 
     $product->save();
 
@@ -94,10 +111,15 @@ class ShopController extends Controller
     $lands = Land::all();
     $employees = Employee::all();
     $editshop = Shop::find($shop['id']);
+    $selectedLands = Land::find($shop['land_id']);
+    $selectedEmployee = Employee::find($shop['employee_id']);
+
     return Inertia::render('Shop/Edit', [
       'shop' => $editshop,
       'lands' => $lands,
       'employees' => $employees,
+      'selectLand' => $selectedLands,
+      'selectEmployee' => $selectedEmployee,
     ]);
   }
 
@@ -107,6 +129,51 @@ class ShopController extends Controller
   public function update(Request $request, Shop $shop)
   {
     //
+    //dd($request);
+    $request->validate([
+      'type' => 'required|string|max:255',
+
+      'amount' => 'required|decimal:0,5',
+
+      //'description' => 'required|string',
+
+      'data' => 'required|date',
+
+      //'file' => 'required|file',
+    ]);
+
+    $product = Shop::find($shop['id']);
+
+    $product->type = $request->type;
+
+    $product->data = $request->data;
+
+    $product->land_id = $request->selectedLands[0]['id'];
+
+    $product->employee_id = $request->selectedEmployees[0]['id'];
+
+    $product->amount = $request->amount;
+
+    $product->description = $request->description;
+
+    if ($request->hasFile('file')) {
+      $file = $request->file('file');
+
+      $name = time() . '.' . $file->getClientOriginalExtension();
+
+      // $destinationPath = public_path('/files');
+      $destinationPath = storage_path('app/files');
+
+      $file->move($destinationPath, $name);
+
+      $product->file = $name;
+    }
+
+    $product->save();
+
+    return redirect()
+      ->route('retailers.index')
+      ->with('success', 'Shop updated successfully.');
   }
 
   /**
