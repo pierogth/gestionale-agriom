@@ -118,7 +118,33 @@ class WorkController extends Controller
    */
   public function show(Work $work)
   {
-    //
+    $entri = Work::select([
+      'id',
+      'where',
+      'land_id',
+      'description',
+      'ehour',
+      'workhours',
+      'data',
+    ])
+      ->with('employees')
+      ->where('id', $work['id'])
+      ->get()
+      ->toArray();
+
+    //$entri[0]['employee'] = $entri[0]['employee']['namesurname'];
+
+    //$entri[0]['retailer'] = $entri[0]['retailer']['name'];
+    //dd($entri[0]);
+    //dd($land);
+    // dd($sh[0]);
+
+    return Inertia::render('Work/Show', [
+      'work' => $entri[0],
+      /*   'resource' => 'Magazzino',
+      'addname' => 'Prodotto',
+      'route' => 'products', */
+    ]);
   }
 
   /**

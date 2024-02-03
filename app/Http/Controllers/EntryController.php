@@ -135,7 +135,36 @@ class EntryController extends Controller
    */
   public function show(Entry $entry)
   {
-    //
+    $entri = Entry::select([
+      'id',
+      'quantity',
+      'is_payed',
+      'retailer_id',
+      'type',
+      'payer',
+      'description',
+      'payment_type',
+      'data',
+      'file',
+    ])
+      ->with('retailer', 'products')
+      ->where('id', $entry['id'])
+      ->get()
+      ->toArray();
+
+    //$entri[0]['employee'] = $entri[0]['employee']['namesurname'];
+
+    $entri[0]['retailer'] = $entri[0]['retailer']['name'];
+    //dd($entri);
+    //dd($land);
+    // dd($sh[0]);
+
+    return Inertia::render('Entry/Show', [
+      'entry' => $entri[0],
+      /*   'resource' => 'Magazzino',
+      'addname' => 'Prodotto',
+      'route' => 'products', */
+    ]);
   }
 
   /**

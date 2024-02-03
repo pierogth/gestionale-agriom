@@ -16,4 +16,9 @@ class Retailer extends Model
       'retailer_id'
     );
   }
+
+  public function entry(): HasOne
+  {
+    return $this->hasOne(Entry::class);
+  }
 }

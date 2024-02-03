@@ -36,22 +36,23 @@ Route::middleware([
   Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
   })->name('dashboard');
+
+  Route::resource('products', App\Http\Controllers\ProductController::class);
+  Route::post('/products/{product}', [
+    ProductController::class,
+    'update',
+  ])->name('products.update');
+
+  Route::resource('lands', App\Http\Controllers\LandController::class);
+  Route::resource('employees', App\Http\Controllers\EmployeeController::class);
+  Route::resource('retailers', App\Http\Controllers\RetailerController::class);
+  Route::resource('shops', App\Http\Controllers\ShopController::class);
+  Route::post('/shops/{shop}', [ShopController::class, 'update'])->name(
+    'shops.update'
+  );
+  Route::resource('entries', App\Http\Controllers\EntryController::class);
+  Route::post('/entries/{entry}', [EntryController::class, 'update'])->name(
+    'entries.update'
+  );
+  Route::resource('works', App\Http\Controllers\WorkController::class);
 });
-
-Route::resource('products', App\Http\Controllers\ProductController::class);
-Route::post('/products/{product}', [ProductController::class, 'update'])->name(
-  'products.update'
-);
-
-Route::resource('lands', App\Http\Controllers\LandController::class);
-Route::resource('employees', App\Http\Controllers\EmployeeController::class);
-Route::resource('retailers', App\Http\Controllers\RetailerController::class);
-Route::resource('shops', App\Http\Controllers\ShopController::class);
-Route::post('/shops/{shop}', [ShopController::class, 'update'])->name(
-  'shops.update'
-);
-Route::resource('entries', App\Http\Controllers\EntryController::class);
-Route::post('/entries/{entry}', [EntryController::class, 'update'])->name(
-  'entries.update'
-);
-Route::resource('works', App\Http\Controllers\WorkController::class);

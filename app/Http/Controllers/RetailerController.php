@@ -89,7 +89,25 @@ class RetailerController extends Controller
    */
   public function show(Retailer $retailer)
   {
-    //
+    $retailer = Retailer::select(['id', 'name', 'place', 'balance'])
+      ->with('products')
+      ->where('id', $retailer['id'])
+      ->get()
+      ->toArray();
+
+    /*    $arrWheres = [];
+    foreach ($land[0]['works'] as $work) {
+      array_push($arrWheres, $work['description']);
+    }
+    $land[0]['works'] = $arrWheres; */
+    //dd($land);
+
+    return Inertia::render('Retailer/Show', [
+      'retailer' => $retailer[0],
+      /*   'resource' => 'Magazzino',
+      'addname' => 'Prodotto',
+      'route' => 'products', */
+    ]);
   }
 
   /**

@@ -20,7 +20,12 @@ class LandController extends Controller
       'dimension as Superficie',
       'coltivation as Tipologia',
       'workhours as N°ore Lavoro',
-    ])->get();
+    ])
+      ->with('works')
+      ->get()
+      ->toArray();
+
+    //dd($products);
     return Inertia::render('Lands', [
       'products' => $products,
       'resource' => 'Terreni',
@@ -84,7 +89,32 @@ class LandController extends Controller
    */
   public function show(Land $land)
   {
-    //
+    $land = Land::select([
+      'id',
+      'name',
+      'owner',
+      'dimension',
+      'coltivation',
+      'workhours',
+    ])
+      ->with('works')
+      ->where('id', $land['id'])
+      ->get()
+      ->toArray();
+
+    $arrWheres = [];
+    foreach ($land[0]['works'] as $work) {
+      array_push($arrWheres, $work['description']);
+    }
+    $land[0]['works'] = $arrWheres;
+    //dd($land);
+
+    return Inertia::render('Lands/Show', [
+      'land' => $land[0],
+      /*   'resource' => 'Magazzino',
+      'addname' => 'Prodotto',
+      'route' => 'products', */
+    ]);
   }
 
   /**

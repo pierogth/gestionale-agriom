@@ -100,7 +100,34 @@ class ShopController extends Controller
    */
   public function show(Shop $shop)
   {
-    //
+    $sh = Shop::select([
+      'id',
+      'type',
+      'amount',
+      'description',
+      'data',
+      'file',
+      'land_id',
+      'employee_id',
+    ])
+      ->with('employee', 'land')
+      ->where('id', $shop['id'])
+      ->get()
+      ->toArray();
+
+    $sh[0]['employee'] = $sh[0]['employee']['namesurname'];
+
+    $sh[0]['land'] = $sh[0]['land']['name'];
+
+    //dd($land);
+    // dd($sh[0]);
+
+    return Inertia::render('Shop/Show', [
+      'shop' => $sh[0],
+      /*   'resource' => 'Magazzino',
+      'addname' => 'Prodotto',
+      'route' => 'products', */
+    ]);
   }
 
   /**

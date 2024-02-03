@@ -14,9 +14,10 @@ interface Props {
 }
 
 export default function TableBody(props: PropsWithChildren<Props>) {
-   const [items, setItems] = useState(props.data);
+  const [items, setItems] = useState(props.data);
+  console.log(props.data)
 const route = useRoute();
-    let myKeys = Object.keys(items[0]);
+    let myKeys = Object.keys(props.data[0]).slice(0,-1);
   return (
     <tbody style={{color:"lightgrey"}}>
                                 {props.data.map((product) => {console.log(product)
