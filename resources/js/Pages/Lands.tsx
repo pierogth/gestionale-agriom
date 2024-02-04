@@ -11,7 +11,7 @@ import useRoute from '@/Hooks/useRoute';
 
 export default function Lands({ products, resource, route, addname }) {
   console.log(resource)
-  {console.log("------>>>>>"+Object.keys(products[0]).slice(0,-1))}
+  //{console.log("------>>>>>"+Object.keys(products[0]).slice(0,-1))}
   const [columns, setColumns] = useState([]);
     const [searchInput, setSearchInput] = useState('');
 
@@ -66,18 +66,19 @@ const router = useRoute();
                     onChange={e => setSearchInput(e.target.value)}
             />
             
-            <SortableTable columns={Object.keys(products[0]).slice(0,-1)}
+           {products[0] ? <SortableTable columns={products && Object.keys(products[0]).slice(0,-1)}
                 data={dataFilterOrderAndPaginate}
                 setData={setDataFilterOrderAndPaginate}
                 searchInput={searchInput}
               actions={actions.length > 0 ? true : false}>
-              <TableBody   columns={Object.keys(products[0]).slice(0,-1)}
+              <TableBody   columns={products && Object.keys(products[0]).slice(0,-1)}
                   data={dataFilterOrderAndPaginate}
                 actions={[]}
               routes={route}>
 
               </TableBody>
-              </SortableTable>
+              </SortableTable>:        <h2 className="font-semibold text-xl text-center text-gray-800 dark:text-gray-200 leading-tight">
+Non ci sono dati</h2> }
 
           </div>
         </div>
