@@ -15,7 +15,7 @@ const Land = ({ land }) => {
         <div className="flex justify-between">
           <h2></h2>
           <h2 className="font-semibold text-xl text-center text-gray-800 dark:text-gray-200 leading-tight">
-            Lands
+            Terreno
           </h2>
           <button
             onClick={() => router.visit(route('lands.index'))}
@@ -26,16 +26,16 @@ const Land = ({ land }) => {
         </div>
       )}
     >
-      <div className="dark:bg-grey-900 h-screen flex items-center justify-center text-center">
+      <div className="dark:bg-grey-900 flex items-center justify-center text-center">
         <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold mb-2 text-white dark:text-gray-100">{land.name}</h2>
-          <p className="text-lg mb-4 text-white dark:text-gray-100">Owner: {land.owner}</p>
-          <p className="text-lg mb-4 text-white dark:text-gray-100">Dimension: {land.dimension} {land.um}</p>
-          <p className="text-lg mb-4 text-white dark:text-gray-100">Coltivation: {land.coltivation}</p>
-          <p className="text-lg mb-4 text-white dark:text-gray-100">Workhours: {land.workhours}</p>
-          <p className="text-lg mb-4 text-white dark:text-gray-100">Productions: {land.productions}</p>
-          <p className="text-lg mb-4 text-white dark:text-gray-100">Description: {land.description}</p>
-         <p className="text-lg mb-4 text-white dark:text-gray-100">Works: {land.works.join(', ')}</p> 
+          <p className="text-lg mb-4 text-white dark:text-gray-100">Proprietario: {land.owner}</p>
+          <p className="text-lg mb-4 text-white dark:text-gray-100">Dimensione: {land.dimension} {land.um}</p>
+          <p className="text-lg mb-4 text-white dark:text-gray-100">Coltivazione: {land.coltivation}</p>
+          <p className="text-lg mb-4 text-white dark:text-gray-100">Ore di lavoro: {land.workhours}</p>
+          <p className="text-lg mb-4 text-white dark:text-gray-100">Produzioni: {land.productions}</p>
+          <p className="text-lg mb-4 text-white dark:text-gray-100">Descrizione: {land.description}</p>
+         <p className="text-lg mb-4 text-white dark:text-gray-100">Lavori: {land.works.join(', ')}</p> 
         </div>
       </div>
     </AppLayout>

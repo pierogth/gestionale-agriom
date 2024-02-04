@@ -141,7 +141,7 @@ const handleFileChange = (event) => {
         <div className="dark:bg-grey-900 relative px-4 py-10 shadow-lg sm:rounded-3xl sm:p-20">
           <form onSubmit={handleSubmit}>
             <div className="mb-5">
-              <label htmlFor="type" className="block mb-2 text-sm font-medium text-gray-600">€</label>
+              <label htmlFor="type" className="block mb-2 text-sm font-medium text-black-600">€</label>
               <input
                 type="number"
                 name="quantity"
@@ -151,7 +151,7 @@ const handleFileChange = (event) => {
               />
             {errors.quantity !== null ? <small style={{color:"red"}}>{errors.quantity}</small>: ''}
            </div>
-                 <div className="mb-5">      <label htmlFor="retailSelect" className="block mb-2 text-sm font-medium text-gray-600">Rivenditore</label>
+                 <div className="mb-5">      <label htmlFor="retailSelect" className="block mb-2 text-sm font-medium text-black-600">Rivenditore</label>
 
            <select
 
@@ -161,7 +161,7 @@ const handleFileChange = (event) => {
 
           onChange={(e) => setSelectedRetail(e.target.value)}
 
-          className="w-full py-2 pl-3 pr-8 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="w-full py-2 pl-3 pr-8 text-black-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 
         >      {retailers.map((retailer) => (
 
@@ -175,7 +175,7 @@ const handleFileChange = (event) => {
 
             </select></div>  
             <div className="mb-5">
-              <label htmlFor="place" className="block mb-2 text-sm font-medium text-gray-600">Tipologia</label>
+              <label htmlFor="place" className="block mb-2 text-sm font-medium text-black-600">Tipologia</label>
               <input
                 type="text"
                 name="type"
@@ -189,7 +189,7 @@ const handleFileChange = (event) => {
                      
                      <div className="mb-4">
 
-        <label htmlFor="is_payed" className="block text-gray-700 font-bold mb-2">
+        <label htmlFor="is_payed" className="block text-black-700 font-bold mb-2">
 
           Is paid?
 
@@ -217,7 +217,7 @@ const handleFileChange = (event) => {
 
             />
 
-            <label htmlFor="is_payed_true" className="block text-gray-700 font-bold">
+            <label htmlFor="is_payed_true" className="block text-black-700 font-bold">
 
               Yes
 
@@ -245,7 +245,7 @@ const handleFileChange = (event) => {
 
             />
 
-            <label htmlFor="is_payed_false" className="block text-gray-700 font-bold">
+            <label htmlFor="is_payed_false" className="block text-black-700 font-bold">
 
               No
 
@@ -258,7 +258,7 @@ const handleFileChange = (event) => {
       </div>
                      {/* ... include the other fields in a similar manner ... */}
                          <div className="mb-5">
-              <label htmlFor="balance" className="block mb-2 text-sm font-medium text-gray-600">Descrizione</label>
+              <label htmlFor="balance" className="block mb-2 text-sm font-medium text-black-600">Descrizione</label>
               <input
                 type="text"
                 name="description"
@@ -270,7 +270,7 @@ const handleFileChange = (event) => {
                      </div>
                     {/* ... include the other fields in a similar manner ... */}
                          <div className="mb-5">
-              <label htmlFor="data" className="block mb-2 text-sm font-medium text-gray-600">Data</label>
+              <label htmlFor="data" className="block mb-2 text-sm font-medium text-black-600">Data</label>
               <input
                 type="date"
                 name="data"
@@ -281,7 +281,7 @@ const handleFileChange = (event) => {
           {errors.data !== null ? <small style={{color:"red"}}>{errors.data}</small>: ''}
                      </div>
                          <div className="mb-5">
-              <label htmlFor="data" className="block mb-2 text-sm font-medium text-gray-600">Pagante</label>
+              <label htmlFor="data" className="block mb-2 text-sm font-medium text-black-600">Pagante</label>
               <input
                 type="text"
                 name="payer"
@@ -292,7 +292,7 @@ const handleFileChange = (event) => {
           {errors.payer !== null ? <small style={{color:"red"}}>{errors.payer}</small>: ''}
                      </div>
                          <div className="mb-5">
-              <label htmlFor="data" className="block mb-2 text-sm font-medium text-gray-600">Tipo di pagamento</label>
+              <label htmlFor="data" className="block mb-2 text-sm font-medium text-black-600">Tipo di pagamento</label>
               <input
                 type="text"
                 name="payment_type"
@@ -304,7 +304,7 @@ const handleFileChange = (event) => {
                      </div>
                             {/* ... include the other fields in a similar manner ... */}
                          <div className="mb-5">
-              <label htmlFor="file" className="block mb-2 text-sm font-medium text-gray-600">File</label>
+              <label htmlFor="file" className="block mb-2 text-sm font-medium text-black-600">File</label>
               <input
                 type="file"
                 name="file"

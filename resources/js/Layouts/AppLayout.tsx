@@ -86,9 +86,10 @@ export default function AppLayout({
                   </NavLink>
                       <NavLink
                     href={"#"}
+                    
                     active={route().current('dashboard')}
                   >
-                    Bilancio
+                    <button onClick={()=>alert('tempo al tempo...')}>Bilancio</button>
                   </NavLink>
                       <NavLink
                     href={route('retailers.index')}

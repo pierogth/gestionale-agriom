@@ -27,7 +27,7 @@ const ProductForm = ({ products,selectedProducts, setSelectedProducts  }) => {
         <select
           value={product.id || ''}
           onChange={(e) => handleSelectChange(index, e)}
-          className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          className="block appearance-none w-full bg-gray-200 border border-gray-200 text-black-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
         >
           <option value="">Scegli collaboratore</option>
           {products.map((p) => (
@@ -38,7 +38,7 @@ const ProductForm = ({ products,selectedProducts, setSelectedProducts  }) => {
         </select>
         {product.id && (
           <div>
-            <label htmlFor={`quantity-${index}`} className="block text-sm font-medium text-gray-700">
+            <label htmlFor={`quantity-${index}`} className="block text-sm font-medium text-black-700">
               Ore lavoro {product.name}
             </label>
             <input

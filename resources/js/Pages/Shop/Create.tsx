@@ -120,7 +120,7 @@ export default function App({ lands, employees }) {
         <div className="dark:bg-grey-900 relative px-4 py-10 shadow-lg sm:rounded-3xl sm:p-20">
           <form onSubmit={handleSubmit}>
             <div className="mb-5">
-              <label htmlFor="type" className="block mb-2 text-sm font-medium text-gray-600">Tipologia</label>
+              <label htmlFor="type" className="block mb-2 text-sm font-medium text-black-600">Tipologia</label>
               <input
                 type="text"
                 name="type"
@@ -131,7 +131,7 @@ export default function App({ lands, employees }) {
             {errors.type !== null ? <small style={{color:"red"}}>{errors.type}</small>: ''}
             </div>
             <div className="mb-5">
-              <label htmlFor="place" className="block mb-2 text-sm font-medium text-gray-600">€</label>
+              <label htmlFor="place" className="block mb-2 text-sm font-medium text-black-600">€</label>
               <input
                 type="number"
                 name="amount"
@@ -147,7 +147,7 @@ export default function App({ lands, employees }) {
       <div className="mb-5">
 <EmployeeForm products={employees} selectedProducts={selectedEmployees} setSelectedProducts={setSelectedEmployees}></EmployeeForm>
       </div>          <div className="mb-5">
-              <label htmlFor="balance" className="block mb-2 text-sm font-medium text-gray-600">Descrizione</label>
+              <label htmlFor="balance" className="block mb-2 text-sm font-medium text-black-600">Descrizione</label>
               <input
                 type="text"
                 name="description"
@@ -159,7 +159,7 @@ export default function App({ lands, employees }) {
                      </div>
                     {/* ... include the other fields in a similar manner ... */}
                          <div className="mb-5">
-              <label htmlFor="data" className="block mb-2 text-sm font-medium text-gray-600">Data</label>
+              <label htmlFor="data" className="block mb-2 text-sm font-medium text-black-600">Data</label>
               <input
                 type="date"
                 name="data"
@@ -171,7 +171,7 @@ export default function App({ lands, employees }) {
                      </div>
                             {/* ... include the other fields in a similar manner ... */}
                          <div className="mb-5">
-              <label htmlFor="file" className="block mb-2 text-sm font-medium text-gray-600">File</label>
+              <label htmlFor="file" className="block mb-2 text-sm font-medium text-black-600">File</label>
               <input
                 type="file"
                 name="file"

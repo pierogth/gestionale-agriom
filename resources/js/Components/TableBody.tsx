@@ -23,7 +23,7 @@ const route = useRoute();
                                 {props.data.map((product) => {console.log(product)
                                     return  <tr
               className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"> {myKeys.map((key) => {
-                                     
+                                      if(key!=='id')
                                         return <td scope="col" className="px-6 py-4">{product[key]}</td>
 
               })}     <td>

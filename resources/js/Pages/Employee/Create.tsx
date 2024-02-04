@@ -78,7 +78,7 @@ const App = () => {
         <div className="dark:bg-grey-900 relative px-4 py-10 shadow-lg sm:rounded-3xl sm:p-20">
           <form onSubmit={handleSubmit}>
             <div className="mb-5">
-              <label htmlFor="namesurname" className="block mb-2 text-sm font-medium text-gray-600">Nome e Cognome</label>
+              <label htmlFor="namesurname" className="block mb-2 text-sm font-medium text-black-600">Nome e Cognome</label>
               <input
                 type="text"
                 name="namesurname"
@@ -89,7 +89,7 @@ const App = () => {
             {errors.namesurname !== null ? <small style={{color:"red"}}>{errors.namesurname}</small>: ''}
             </div>
             <div className="mb-5">
-              <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-600">Categoria</label>
+              <label htmlFor="category" className="block mb-2 text-sm font-medium text-black-600">Categoria</label>
               <input
                 type="text"
                 name="category"
@@ -101,7 +101,7 @@ const App = () => {
             </div>
                      {/* ... include the other fields in a similar manner ... */}
                          <div className="mb-5">
-              <label htmlFor="credit" className="block mb-2 text-sm font-medium text-gray-600">Credito</label>
+              <label htmlFor="credit" className="block mb-2 text-sm font-medium text-black-600">Credito</label>
               <input
                 type="number"
                 name="credit"
@@ -112,7 +112,7 @@ const App = () => {
           {errors.credit !== null ? <small style={{color:"red"}}>{errors.credit}</small>: ''}
                      </div>
                          <div className="mb-5">
-              <label htmlFor="shops" className="block mb-2 text-sm font-medium text-gray-600">Spese</label>
+              <label htmlFor="shops" className="block mb-2 text-sm font-medium text-black-600">Spese</label>
               <input
                 type="number"
                 name="shops"
@@ -123,7 +123,7 @@ const App = () => {
              {errors.um !== null ? <small style={{color:"red"}}>{errors.shops}</small>: ''}
                      </div>
                          <div className="mb-5">
-              <label htmlFor="workhours" className="block mb-2 text-sm font-medium text-gray-600">N° ore di lavoro</label>
+              <label htmlFor="workhours" className="block mb-2 text-sm font-medium text-black-600">N° ore di lavoro</label>
               <input
                 type="number"
                 name="workhours"
@@ -134,7 +134,7 @@ const App = () => {
              {errors.workhours !== null ? <small style={{color:"red"}}>{errors.workhours}</small>: ''}
                      </div>
                             <div className="mb-5">
-              <label htmlFor="ehours" className="block mb-2 text-sm font-medium text-gray-600">€-ora</label>
+              <label htmlFor="ehours" className="block mb-2 text-sm font-medium text-black-600">€-ora</label>
               <input
                 type="number"
                 name="ehours"

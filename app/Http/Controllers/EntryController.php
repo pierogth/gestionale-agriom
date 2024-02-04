@@ -230,6 +230,17 @@ class EntryController extends Controller
 
     $product->data = $request->data;
 
+    $selectedProducts = ProductEntry::select(
+      'product_id as id',
+      'entry_id',
+      'quantity'
+    )
+      ->where('entry_id', $entry['id'])
+      ->get()
+      ->toArray();
+
+    //  dd($selectedProducts);
+
     if (
       $request->input('selectedRetailer') != 'nessun rivenditore' &&
       $request->input('is_payed') == true
@@ -256,8 +267,11 @@ class EntryController extends Controller
 
     if (!empty($request->input('selectedProducts'))) {
       $mySync = [];
-      foreach ($request->input('selectedProducts') as $mioprod) {
+      foreach ($request->input('selectedProducts') as $key => $mioprod) {
         $myprod = Product::find($mioprod['id']);
+        //annullo la sottrazione precedents
+        $myprod->quantity =
+          $myprod->quantity + $selectedProducts[$key]['quantity'];
         $myprod->quantity = $myprod->quantity - $mioprod['quantity'];
         $myprod->save();
         //aggiorno i record nella pivot

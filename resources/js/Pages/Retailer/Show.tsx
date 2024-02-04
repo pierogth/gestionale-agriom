@@ -24,18 +24,18 @@ const Retailer = ({ retailer }) => {
         </div>
       )}
     >
-      <div className="dark:bg-grey-900 h-screen flex items-center justify-center text-center">
+      <div className="dark:bg-grey-900 flex items-center justify-center text-center">
         <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold mb-2 text-white dark:text-gray-100">
             {retailer.name}
           </h2>
-          <p className="text-lg mb-4 text-white dark:text-gray-100">Place: {retailer.place}</p>
-          <p className="text-lg mb-4 text-white dark:text-gray-100">Balance: {retailer.balance}</p>
-          <h3 className="text-lg mb-4 text-white dark:text-gray-100">Products:</h3>
+          <p className="text-lg mb-4 text-white dark:text-gray-100">Luogo: {retailer.place}</p>
+          <p className="text-lg mb-4 text-white dark:text-gray-100">Bilancio: {retailer.balance}</p>
+          <h3 className="text-lg mb-4 text-white dark:text-gray-100">Prodotti:</h3>
           <ul className="list-none">
             {retailer.products.map((product) => (
               <li key={product.id} className="text-lg mb-4 text-white dark:text-gray-100">
-                {product.name} - {product.quantity}
+                {product.name} : {product.quantity}
               </li>
             ))}
           </ul>

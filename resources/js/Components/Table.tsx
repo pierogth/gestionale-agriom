@@ -74,9 +74,9 @@ const [dir, setDir] = useState(-1);
                     <thead className="border-b font-medium dark:border-neutral-500">
                                 <tr style={{color:"lightgrey"}}>
                                     {myKeys.map((key) => {
-                                        
+                                        if(key!=='id')
                                         return <th scope="col" className="px-6 py-4"
-                                            onClick={() => { setOrderAndColumn(key); console.log("ciao") }}>{key}</th>
+                                            onClick={() => { setOrderAndColumn(key); }}>{key}</th>
 
                                   })}
                                     

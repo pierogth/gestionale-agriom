@@ -13,7 +13,7 @@ const Shop = ({ shop }) => {
         <div className="flex justify-between">
           <h2></h2>
           <h2 className="font-semibold text-xl text-center text-gray-800 dark:text-gray-200 leading-tight">
-            Shops
+            Spese
           </h2>
           <button
             onClick={() => router.visit(route('shops.index'))}
@@ -24,16 +24,16 @@ const Shop = ({ shop }) => {
         </div>
       )}
     >
-      <div className="dark:bg-grey-900 h-screen flex items-center justify-center text-center">
+      <div className="dark:bg-grey-900 flex items-center justify-center text-center">
         <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold mb-2 text-white dark:text-gray-100">
             {shop.type}
           </h2>
-          <p className="text-lg mb-4 text-white dark:text-gray-100">Amount: {shop.amount}</p>
-          <p className="text-lg mb-4 text-white dark:text-gray-100">Description: {shop.description}</p>
+          <p className="text-lg mb-4 text-white dark:text-gray-100">Quantita : {shop.amount} €</p>
+          <p className="text-lg mb-4 text-white dark:text-gray-100">Descrizione: {shop.description}</p>
           <p className="text-lg mb-4 text-white dark:text-gray-100">Data: {shop.data}</p>
-          <p className="text-lg mb-4 text-white dark:text-gray-100">Land: {shop.land}</p>
-          <p className="text-lg mb-4 text-white dark:text-gray-100">Employee: {shop.employee}</p>
+          <p className="text-lg mb-4 text-white dark:text-gray-100">Terreno: {shop.land}</p>
+          <p className="text-lg mb-4 text-white dark:text-gray-100">Collaboratore: {shop.employee}</p>
           <p className="text-lg mb-4 text-white dark:text-gray-100">File: <a href={'/files/'+shop.file} target="_blank" rel="noopener noreferrer">View File</a></p>
         </div>
       </div>

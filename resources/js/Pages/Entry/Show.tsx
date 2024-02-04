@@ -13,7 +13,7 @@ const Entry = ({ entry }) => {
         <div className="flex justify-between">
           <h2></h2>
           <h2 className="font-semibold text-xl text-center text-gray-800 dark:text-gray-200 leading-tight">
-            Entries
+            Entrate
           </h2>
           <button
             onClick={() => router.visit(route('entries.index'))}
@@ -24,28 +24,28 @@ const Entry = ({ entry }) => {
         </div>
       )}
     >
-      <div className="dark:bg-grey-900 h-screen flex items-center justify-center text-center">
+      <div className="dark:bg-grey-900 flex h-screen items-center justify-center text-center">
         <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold mb-2 text-white dark:text-gray-100">
-            Quantity: {entry.quantity}
+            Quantità: {entry.quantity} €
           </h2>
           <p className="text-lg mb-4 text-white dark:text-gray-100">
-            Is Payed: {entry.is_payed ? 'Yes' : 'No'}
+            Pagato? : {entry.is_payed ? 'Si' : 'No'}
           </p>
           <p className="text-lg mb-4 text-white dark:text-gray-100">
-            Retailer: {entry.retailer.name}
+            Distributore: {entry.retailer.name}
           </p>
-          <p className="text-lg mb-4 text-white dark:text-gray-100">Type: {entry.type}</p>
-          <p className="text-lg mb-4 text-white dark:text-gray-100">Payer: {entry.payer}</p>
-          <p className="text-lg mb-4 text-white dark:text-gray-100">Description: {entry.description}</p>
-          <p className="text-lg mb-4 text-white dark:text-gray-100">Payment Type: {entry.payment_type}</p>
+          <p className="text-lg mb-4 text-white dark:text-gray-100">Tipologia: {entry.type}</p>
+          <p className="text-lg mb-4 text-white dark:text-gray-100">Pagante: {entry.payer}</p>
+          <p className="text-lg mb-4 text-white dark:text-gray-100">Descrizione: {entry.description}</p>
+          <p className="text-lg mb-4 text-white dark:text-gray-100">Tipo pagamento: {entry.payment_type}</p>
           <p className="text-lg mb-4 text-white dark:text-gray-100">Data: {entry.data}</p>
           <p className="text-lg mb-4 text-white dark:text-gray-100">File: <a href={'/files/'+entry.file} target="_blank" rel="noopener noreferrer">View File</a></p>
-          <h3 className="text-lg mb-4 text-white dark:text-gray-100">Products:</h3>
+          <h3 className="text-lg mb-4 text-white dark:text-gray-100">Prodotti:</h3>
           <ul className="list-none">
             {entry.products.map((product) => (
               <li key={product.id} className="text-lg mb-4 text-white dark:text-gray-100">
-                {product.name} - {product.quantity}
+                {product.name} : {product.quantity}
               </li>
             ))}
           </ul>

@@ -102,6 +102,7 @@ class ProductController extends Controller
     }
 
     if ($request->input('selectedProduct') != '') {
+      $product->sfuso_id = (int) $request->input('selectedProduct');
       $sfuso = Product::find($request->input('selectedProduct'));
       $sfuso->quantity =
         $sfuso->quantity - $product->quantity * $product->pieces;
@@ -151,6 +152,7 @@ class ProductController extends Controller
    */
   public function update(Request $request, Product $product)
   {
+    // dd(php_ini_loaded_file());
     //
     //dd($request);
     $request->validate([
@@ -177,11 +179,32 @@ class ProductController extends Controller
 
     $product->name = $request->name;
 
-    $product->quantity = $request->quantity;
+    if ($request->input('selectedProduct') != '') {
+      $sfuso = Product::find($request->input('selectedProduct'));
+      //dd($sfuso);
+      //annullo la sottrazione precedents
+      $sfuso->quantity =
+        $sfuso->quantity + $product['quantity'] * $product['pieces'];
+
+      /*   dd(
+        $product['quantity'],
+        $product['pieces'],
+        (int) $request->quantity,
+        (int) $request->pieces
+      ); */
+      $product['quantity'] = (float) $request->quantity;
+      $product['pieces'] = (int) $request->pieces;
+      $sfuso->quantity =
+        $sfuso->quantity - $product['quantity'] * $product['pieces'];
+      $sfuso->save();
+      // dd($sfuso);
+    }
 
     $product->um = $request->um;
 
     $product->category = $request->category;
+
+    $product->quantity = $request->quantity;
 
     $product->pieces = $request->pieces;
 
@@ -190,7 +213,7 @@ class ProductController extends Controller
     $product->lot = $request->lot;
 
     $product->type = $request->type;
-
+    //dd($request->hasFile('image'));
     if ($request->hasFile('image')) {
       $image = $request->file('image');
 
@@ -203,13 +226,6 @@ class ProductController extends Controller
       $image->move($destinationPath, $name);
 
       $product->image = $name;
-    }
-
-    if ($request->input('selectedProduct') != '') {
-      $sfuso = Product::find($request->input('selectedProduct'));
-      $sfuso->quantity =
-        $sfuso->quantity - $product->quantity * $product->pieces;
-      $sfuso->save();
     }
 
     $product->save();

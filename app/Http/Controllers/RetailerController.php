@@ -68,7 +68,12 @@ class RetailerController extends Controller
     if (!empty($request->input('selectedProducts'))) {
       foreach ($request->input('selectedProducts') as $mioprod) {
         $myprod = Product::find($mioprod['id']);
-        $myprod->quantity = $myprod->quantity - $mioprod['quantity'];
+        if ($myprod->type === 1) {
+          $myprod->quantity = $myprod->quantity - $mioprod['quantity'];
+        } else {
+          $myprod->quantity = $myprod->quantity - $mioprod['pieces'];
+        }
+
         $myprod->save();
         //creo i record nella pivot
         ProductEntry::create([
@@ -148,6 +153,17 @@ class RetailerController extends Controller
 
     $product = Retailer::find($retailer['id']);
 
+    $selectedProducts = ProductRetail::select(
+      'product_id as id',
+      'retailer_id',
+      'quantity'
+    )
+      ->where('retailer_id', $retailer['id'])
+      ->get()
+      ->toArray();
+
+    //dd($selectedProducts);
+
     $product->name = $request->name;
 
     $product->place = $request->place;
@@ -156,9 +172,22 @@ class RetailerController extends Controller
 
     if (!empty($request->input('selectedProducts'))) {
       $mySync = [];
-      foreach ($request->input('selectedProducts') as $mioprod) {
+      foreach ($request->input('selectedProducts') as $key => $mioprod) {
         $myprod = Product::find($mioprod['id']);
-        $myprod->quantity = $myprod->quantity - $mioprod['quantity'];
+        //annullo la sottrazione precedents
+        if ($myprod->type === 1) {
+          $myprod->quantity =
+            $myprod->quantity + $selectedProducts[$key]['quantity'];
+        } else {
+          $myprod->pieces =
+            $myprod->pieces + $selectedProducts[$key]['quantity'];
+        }
+
+        if ($myprod->type === 1) {
+          $myprod->quantity = $myprod->quantity - $mioprod['quantity'];
+        } else {
+          $myprod->pieces = $myprod->quantity - $mioprod['quantity'];
+        }
         $myprod->save();
         //aggiorno i record nella pivot
         $mySync += [$mioprod['id'] => ['quantity' => $mioprod['quantity']]];

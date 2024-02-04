@@ -22,6 +22,8 @@ return new class extends Migration {
       $table->string('image')->nullable();
       /* 0 for sfuso 1 per conf */
       $table->boolean('type');
+      $table->integer('sfuso_id')->nullable();
+
       $table->timestamps();
     });
   }

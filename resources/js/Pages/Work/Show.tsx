@@ -13,7 +13,7 @@ const Work = ({ work }) => {
         <div className="flex justify-between">
           <h2></h2>
           <h2 className="font-semibold text-xl text-center text-gray-800 dark:text-gray-200 leading-tight">
-            Work
+            Lavorazioni
           </h2>
           <button
             onClick={() => router.visit(route('works.index'))}
@@ -24,13 +24,13 @@ const Work = ({ work }) => {
         </div>
       )}
     >
-      <div className="dark:bg-grey-900 h-screen flex items-center justify-center text-center">
+      <div className="dark:bg-grey-900 flex items-center justify-center text-center">
         <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold mb-2 text-white dark:text-gray-100">
             Dove: {work.where}
           </h2>
           <p className="text-lg mb-4 text-white dark:text-gray-100">
-            Description: {work.description}
+            Descrizione: {work.description}
           </p>
           <p className="text-lg mb-4 text-white dark:text-gray-100">
             €-ora: {work.ehour}
@@ -42,7 +42,7 @@ const Work = ({ work }) => {
           <ul className="list-none">
             {work.employees.map((employee) => (
               <li key={employee.id} className="text-lg mb-4 text-white dark:text-gray-100">
-                {employee.namesurname} - {employee.workhours}
+                {employee.namesurname} : {employee.workhours} ore lavoro
               </li>
             ))}
           </ul>

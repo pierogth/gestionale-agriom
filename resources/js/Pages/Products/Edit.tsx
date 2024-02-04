@@ -5,9 +5,9 @@ import useRoute from '@/Hooks/useRoute';
 export default function App({ product, products }) {
 
   
-  const [typo, setTypo] = useState(product.type);
+  const [typo, setTypo] = useState(product.type===1);
   const [errors, setErrors] = useState({});
-  const [selectedProduct, setSelectedProduct] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState(product.sfuso_id);
 
    const [formData, setFormData] = useState({
      name: product.name,
@@ -121,10 +121,10 @@ export default function App({ product, products }) {
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">
         <div className="dark:bg-grey-900 absolute inset-0 bg-gradient-to-r from-cyan-400 to-light-blue-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
         <div className="dark:bg-grey-900 relative px-4 py-10 shadow-lg sm:rounded-3xl sm:p-20">
-         <form onSubmit={handleSubmit}>
+         <form onSubmit={handleSubmit} >
             <div className="mb-4">
 
-        <label htmlFor="is_payed" className="block text-gray-700 font-bold mb-2">
+        <label htmlFor="is_payed" className="block text-black-700 font-bold mb-2">
 
           Tipologia
 
@@ -152,7 +152,7 @@ export default function App({ product, products }) {
 
             />
 
-            <label htmlFor="is_payed_true" className="block text-gray-700 font-bold">
+            <label htmlFor="is_payed_true" className="block text-black-700 font-bold">
 
               Sfuso
 
@@ -180,7 +180,7 @@ export default function App({ product, products }) {
 
             />
 
-            <label htmlFor="is_payed_false" className="block text-gray-700 font-bold">
+            <label htmlFor="is_payed_false" className="block text-black-700 font-bold">
 
               Dettaglio
 
@@ -200,7 +200,7 @@ export default function App({ product, products }) {
 
           onChange={(e) => setSelectedProduct(e.target.value)}
 
-          className="w-full py-2 pl-3 pr-8 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="w-full py-2 pl-3 pr-8 text-black-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 
         >      {products.map((product) => (
 
@@ -215,7 +215,7 @@ export default function App({ product, products }) {
             </select> : ''}
             
             <div className="mb-5">
-              <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-600">Name</label>
+              <label htmlFor="name" className="block mb-2 text-sm font-medium text-black-600">Name</label>
               <input
                 type="text"
                 name="name"
@@ -226,7 +226,7 @@ export default function App({ product, products }) {
             {errors.name !== null ? <small style={{color:"red"}}>{errors.name}</small>: ''}
             </div>
             <div className="mb-5">
-              <label htmlFor="quantity" className="block mb-2 text-sm font-medium text-gray-600">Quantity</label>
+              <label htmlFor="quantity" className="block mb-2 text-sm font-medium text-black-600">Quantity</label>
               <input
                 type="number"
                 name="quantity"
@@ -238,7 +238,7 @@ export default function App({ product, products }) {
             </div>
                      {/* ... include the other fields in a similar manner ... */}
                          <div className="mb-5">
-              <label htmlFor="um" className="block mb-2 text-sm font-medium text-gray-600">Unità di misura</label>
+              <label htmlFor="um" className="block mb-2 text-sm font-medium text-black-600">Unità di misura</label>
               <input
                 type="text"
                 name="um"
@@ -249,7 +249,7 @@ export default function App({ product, products }) {
           {errors.um !== null ? <small style={{color:"red"}}>{errors.um}</small>: ''}
                      </div>
                          <div className="mb-5">
-              <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-600">Categoria</label>
+              <label htmlFor="category" className="block mb-2 text-sm font-medium text-black-600">Categoria</label>
               <input
                 type="text"
                 name="category"
@@ -260,7 +260,7 @@ export default function App({ product, products }) {
              {errors.category !== null ? <small style={{color:"red"}}>{errors.category}</small>: ''}
                      </div>
                          <div className="mb-5">
-              <label htmlFor="pieces" className="block mb-2 text-sm font-medium text-gray-600">Numero pezzi</label>
+              <label htmlFor="pieces" className="block mb-2 text-sm font-medium text-black-600">Numero pezzi</label>
               <input
                 type="number"
                 name="pieces"
@@ -271,7 +271,7 @@ export default function App({ product, products }) {
              {errors.pieces !== null ? <small style={{color:"red"}}>{errors.pieces}</small>: ''}
                      </div>
                          <div className="mb-5">
-              <label htmlFor="lot" className="block mb-2 text-sm font-medium text-gray-600">Lotto</label>
+              <label htmlFor="lot" className="block mb-2 text-sm font-medium text-black-600">Lotto</label>
               <input
                 type="string"
                 name="lot"
@@ -282,7 +282,7 @@ export default function App({ product, products }) {
              {errors.lot !== null ? <small style={{color:"red"}}>{errors.lot}</small>: ''}
                      </div>
                          <div className="mb-5">
-              <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-600">Descrizione</label>
+              <label htmlFor="description" className="block mb-2 text-sm font-medium text-black-600">Descrizione</label>
               <input
                 type="text"
                 name="description"
@@ -293,7 +293,7 @@ export default function App({ product, products }) {
                      </div>
                 
             <div className="mb-5">
-              <label htmlFor="image" className="block mb-2 text-sm font-medium text-gray-600">Image</label>
+              <label htmlFor="image" className="block mb-2 text-sm font-medium text-black-600">Image</label>
               <input
                 type="file"
                 name="image"

@@ -91,8 +91,10 @@ class WorkController extends Controller
     if (!empty($request->input('selectedEmployees'))) {
       foreach ($request->input('selectedEmployees') as $mioprod) {
         $myprod = Employee::find($mioprod['id']);
-        $myprod->workhours = $myprod->workhours + $mioprod['quantity'];
-        $myprod->credit = $myprod->workhours * $myprod->ehour;
+        // dd($myprod->workhours, $myprod->ehour, $mioprod['quantity']);
+        $myprod->workhours = $myprod->workhours + (int) $mioprod['quantity'];
+        $myprod->credit += (int) $mioprod['quantity'] * $product->ehour;
+        //  dd($myprod['workhours'], $product->ehour, $mioprod);
         $myprod->save();
         WorkEmployee::create([
           'work_id' => $product->id,
@@ -200,20 +202,24 @@ class WorkController extends Controller
 
     $product->data = $request->data;
 
-    $product->ehour = $request->ehour;
-
-    $product->workhours = $request->workhours;
-
-    $product->description = $request->description;
-
-    $product->save();
+    $selectedEmp = WorkEmployee::select(
+      'work_id as id',
+      'employee_id',
+      'nrhours'
+    )
+      ->where('work_id', $work['id'])
+      ->get()
+      ->toArray();
 
     if (!empty($request->input('selectedEmployees'))) {
       $mySync = [];
-      foreach ($request->input('selectedEmployees') as $mioprod) {
+      foreach ($request->input('selectedEmployees') as $key => $mioprod) {
         $myprod = Employee::find($mioprod['id']);
-        $myprod->workhours = $myprod->workhours + $mioprod['quantity'];
-        $myprod->credit = $myprod->workhours * $myprod->ehour;
+        //annullo precedents
+        $myprod->workhours = $myprod->workhours - $selectedEmp[$key]['nrhours'];
+        //$myprod->credit = $myprod->workhours * $myprod->ehour;
+        $myprod->workhours = $myprod->workhours + (int) $mioprod['quantity'];
+        $myprod->credit += (int) $mioprod['quantity'] * $product->ehour;
         $myprod->save();
 
         $mySync += [$mioprod['id'] => ['nrhours' => $mioprod['quantity']]];
@@ -237,6 +243,14 @@ class WorkController extends Controller
       //dd($mySync);
       $product->employees()->sync($mySync);
     }
+
+    $product->ehour = $request->ehour;
+
+    $product->workhours = $request->workhours;
+
+    $product->description = $request->description;
+
+    $product->save();
   }
 
   /**

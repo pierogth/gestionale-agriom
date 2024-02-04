@@ -80,7 +80,7 @@ const App = ({land}) => {
         <div className="dark:bg-grey-900 relative px-4 py-10 shadow-lg sm:rounded-3xl sm:p-20">
           <form onSubmit={handleSubmit}>
             <div className="mb-5">
-              <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-600">Nome</label>
+              <label htmlFor="name" className="block mb-2 text-sm font-medium text-black-600">Nome</label>
               <input
                 type="text"
                 name="name"
@@ -91,7 +91,7 @@ const App = ({land}) => {
             {errors.name !== null ? <small style={{color:"red"}}>{errors.name}</small>: ''}
             </div>
             <div className="mb-5">
-              <label htmlFor="quantity" className="block mb-2 text-sm font-medium text-gray-600">Proprietario</label>
+              <label htmlFor="quantity" className="block mb-2 text-sm font-medium text-black-600">Proprietario</label>
               <input
                 type="text"
                 name="owner"
@@ -103,7 +103,7 @@ const App = ({land}) => {
             </div>
                      {/* ... include the other fields in a similar manner ... */}
                          <div className="mb-5">
-              <label htmlFor="dimension" className="block mb-2 text-sm font-medium text-gray-600">Dimensione</label>
+              <label htmlFor="dimension" className="block mb-2 text-sm font-medium text-black-600">Dimensione</label>
               <input
                 type="text"
                 name="dimension"
@@ -114,7 +114,7 @@ const App = ({land}) => {
           {errors.dimension !== null ? <small style={{color:"red"}}>{errors.dimension}</small>: ''}
                      </div>
                          <div className="mb-5">
-              <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-600">Unità di misura</label>
+              <label htmlFor="category" className="block mb-2 text-sm font-medium text-black-600">Unità di misura</label>
               <input
                 type="text"
                 name="um"
@@ -125,7 +125,7 @@ const App = ({land}) => {
              {errors.um !== null ? <small style={{color:"red"}}>{errors.um}</small>: ''}
                      </div>
                          <div className="mb-5">
-              <label htmlFor="pieces" className="block mb-2 text-sm font-medium text-gray-600">Coltivazione</label>
+              <label htmlFor="pieces" className="block mb-2 text-sm font-medium text-black-600">Coltivazione</label>
               <input
                 type="text"
                 name="coltivation"
@@ -136,7 +136,7 @@ const App = ({land}) => {
              {errors.coltivation !== null ? <small style={{color:"red"}}>{errors.coltivation}</small>: ''}
                      </div>
                             <div className="mb-5">
-              <label htmlFor="pieces" className="block mb-2 text-sm font-medium text-gray-600">Descrizione</label>
+              <label htmlFor="pieces" className="block mb-2 text-sm font-medium text-black-600">Descrizione</label>
               <input
                 type="text"
                 name="description"

@@ -13,7 +13,7 @@ const Employee = ({ employee }) => {
         <div className="flex justify-between">
           <h2></h2>
           <h2 className="font-semibold text-xl text-center text-gray-800 dark:text-gray-200 leading-tight">
-            Employees
+            Collaboratore
           </h2>
           <button
             onClick={() => router.visit(route('employees.index'))}
@@ -24,16 +24,16 @@ const Employee = ({ employee }) => {
         </div>
       )}
     >
-      <div className="dark:bg-grey-900 h-screen flex items-center justify-center text-center">
+      <div className="dark:bg-grey-900 flex items-center justify-center text-center">
         <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold mb-2 text-white dark:text-gray-100">
-            {employee.namesurnawme}
+            {employee.namesurname}
           </h2>
-          <p className="text-lg mb-4 text-white dark:text-gray-100">Category: {employee.category}</p>
-          <p className="text-lg mb-4 text-white dark:text-gray-100">Credit: {employee.credit}</p>
-          <p className="text-lg mb-4 text-white dark:text-gray-100">Shops: {employee.shops}</p>
-          <p className="text-lg mb-4 text-white dark:text-gray-100">Workhours: {employee.workhours}</p>
-          <p className="text-lg mb-4 text-white dark:text-gray-100">Ehour: {employee.ehour}</p>
+          <p className="text-lg mb-4 text-white dark:text-gray-100">Categoria: {employee.category}</p>
+          <p className="text-lg mb-4 text-white dark:text-gray-100">Credito: {employee.credit}</p>
+          <p className="text-lg mb-4 text-white dark:text-gray-100">Spese: {employee.shops}</p>
+          <p className="text-lg mb-4 text-white dark:text-gray-100">Ore di lavoro: {employee.workhours}</p>
+          <p className="text-lg mb-4 text-white dark:text-gray-100">€-ora: {employee.ehour}</p>
         </div>
       </div>
     </AppLayout>

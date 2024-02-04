@@ -17,11 +17,11 @@ const Product = ({ product }) => {
 
     <div className="flex justify-between">
 
-      <h2></h2>
+     <h2></h2>
 
       <h2 className="font-semibold text-xl text-center text-gray-800 dark:text-gray-200 leading-tight">
 
-        
+        Prodotto
 
       </h2>
 
@@ -55,15 +55,15 @@ const Product = ({ product }) => {
 
         <p className="text-lg mb-4 text-white dark:text-gray-100">{product.description}</p>
 
-        <p className="text-xl font-bold mb-2 text-white dark:text-gray-100">Quantity: {product.quantity} {product.um}</p>
+        <p className="text-xl font-bold mb-2 text-white dark:text-gray-100">Quantità: {product.quantity} {product.um}</p>
 
-        <p className="text-lg mb-4 text-white dark:text-gray-100">Category: {product.category}</p>
+        <p className="text-lg mb-4 text-white dark:text-gray-100">Categoria: {product.category}</p>
 
-        <p className="text-lg mb-4 text-white dark:text-gray-100">Pieces: {product.pieces}</p>
+        <p className="text-lg mb-4 text-white dark:text-gray-100">Pezzi: {product.pieces}</p>
 
-        <p className="text-lg mb-4 text-white dark:text-gray-100">Lot: {product.lot}</p>
+        <p className="text-lg mb-4 text-white dark:text-gray-100">Lotto: {product.lot}</p>
 
-        <p className="text-lg mb-4 text-white dark:text-gray-100">Type: {product.type}</p>
+        <p className="text-lg mb-4 text-white dark:text-gray-100">Tipologia: {product.type === 1 ? 'Sfuso' : 'Dettaglio'}</p>
 
       </div>
 

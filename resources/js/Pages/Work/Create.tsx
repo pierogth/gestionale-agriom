@@ -115,7 +115,7 @@ export default function App({ employees, lands }) {
         <div className="dark:bg-grey-900 relative px-4 py-10 shadow-lg sm:rounded-3xl sm:p-20">
           <form onSubmit={handleSubmit}>
             <div className="mb-5">
-              <label htmlFor="type" className="block mb-2 text-sm font-medium text-gray-600">Dove</label>
+              <label htmlFor="type" className="block mb-2 text-sm font-medium text-black-600">Dove</label>
            <select
 
           id="productSelect"
@@ -124,7 +124,7 @@ export default function App({ employees, lands }) {
 
                onChange={(e) => setSelectedLand(e.target.value)}
 
-          className="w-full py-2 pl-3 pr-8 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="w-full py-2 pl-3 pr-8 text-black-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 
         >      {lands.map((land) => (
 
@@ -143,7 +143,7 @@ export default function App({ employees, lands }) {
 <ProductForm products={employees} selectedProducts={selectedEmployees} setSelectedProducts={setSelectedEmployees}></ProductForm>
       </div>   
             <div className="mb-5">
-              <label htmlFor="place" className="block mb-2 text-sm font-medium text-gray-600">€-ora</label>
+              <label htmlFor="place" className="block mb-2 text-sm font-medium text-black-600">€-ora</label>
               <input
                 type="number"
                 name="ehour"
@@ -155,7 +155,7 @@ export default function App({ employees, lands }) {
                      </div>
                      
                       <div className="mb-5">
-              <label htmlFor="place" className="block mb-2 text-sm font-medium text-gray-600">N° ore di lavoro</label>
+              <label htmlFor="place" className="block mb-2 text-sm font-medium text-black-600">N° ore di lavoro</label>
               <input
                 type="number"
                 name="workhours"
@@ -167,7 +167,7 @@ export default function App({ employees, lands }) {
             </div>
                      {/* ... include the other fields in a similar manner ... */}
                          <div className="mb-5">
-              <label htmlFor="balance" className="block mb-2 text-sm font-medium text-gray-600">Descrizione</label>
+              <label htmlFor="balance" className="block mb-2 text-sm font-medium text-black-600">Descrizione</label>
               <input
                 type="text"
                 name="description"
@@ -179,7 +179,7 @@ export default function App({ employees, lands }) {
                      </div>
                     {/* ... include the other fields in a similar manner ... */}
                          <div className="mb-5">
-              <label htmlFor="data" className="block mb-2 text-sm font-medium text-gray-600">Data</label>
+              <label htmlFor="data" className="block mb-2 text-sm font-medium text-black-600">Data</label>
               <input
                 type="date"
                 name="data"

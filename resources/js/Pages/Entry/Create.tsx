@@ -162,7 +162,7 @@ export default function App({ products, retailers }) {
 
           onChange={(e) => setSelectedRetail(e.target.value)}
 
-          className="w-full py-2 pl-3 pr-8 text-gray-700 dark:bg-grey-900 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="w-full py-2 pl-3 pr-8 text-black-700 dark:bg-grey-900 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 
         >      {retailers.map((retailer) => (
 

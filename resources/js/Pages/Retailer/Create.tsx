@@ -95,7 +95,7 @@ export default function App({ products }) {
         <div className="dark:bg-grey-900 relative px-4 py-10 shadow-lg sm:rounded-3xl sm:p-20">
           <form onSubmit={handleSubmit}>
             <div className="mb-5">
-              <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-600">Nome</label>
+              <label htmlFor="name" className="block mb-2 text-sm font-medium text-black-600">Nome</label>
               <input
                 type="text"
                 name="name"
@@ -106,7 +106,7 @@ export default function App({ products }) {
             {errors.name !== null ? <small style={{color:"red"}}>{errors.name}</small>: ''}
             </div>
             <div className="mb-5">
-              <label htmlFor="place" className="block mb-2 text-sm font-medium text-gray-600">Luogo</label>
+              <label htmlFor="place" className="block mb-2 text-sm font-medium text-black-600">Luogo</label>
               <input
                 type="text"
                 name="place"
@@ -121,7 +121,7 @@ export default function App({ products }) {
       </div>     
                      {/* ... include the other fields in a similar manner ... */}
                          <div className="mb-5">
-              <label htmlFor="balance" className="block mb-2 text-sm font-medium text-gray-600">Bilancio</label>
+              <label htmlFor="balance" className="block mb-2 text-sm font-medium text-black-600">Bilancio</label>
               <input
                 type="number"
                 name="balance"
