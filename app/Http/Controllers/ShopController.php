@@ -114,10 +114,12 @@ class ShopController extends Controller
       ->where('id', $shop['id'])
       ->get()
       ->toArray();
-
-    $sh[0]['employee'] = $sh[0]['employee']['namesurname'];
-
-    $sh[0]['land'] = $sh[0]['land']['name'];
+    if ($sh[0]['employee'] !== null) {
+      $sh[0]['employee'] = $sh[0]['employee']['namesurname'];
+    }
+    if ($sh[0]['land'] !== null) {
+      $sh[0]['land'] = $sh[0]['land']['name'];
+    }
 
     //dd($land);
     // dd($sh[0]);

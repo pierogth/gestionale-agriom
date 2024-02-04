@@ -7,7 +7,7 @@ import ProductForm from './ProductForm';
 export default function App({ work, employees, lands, selectEmployees }) {
 
   const [selectedEmployees, setSelectedEmployees] = useState(selectEmployees);
-        const [selectedLand, setSelectedLand] = useState(work.land_id.toString());
+        const [selectedLand, setSelectedLand] = useState(work.land_id ? work.land_id.toString(): null);
 
 
 

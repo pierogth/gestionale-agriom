@@ -33,7 +33,7 @@ const Entry = ({ entry }) => {
             Pagato? : {entry.is_payed ? 'Si' : 'No'}
           </p>
           <p className="text-lg mb-4 text-white dark:text-gray-100">
-            Distributore: {entry.retailer.name}
+            Distributore: {entry.retailer && entry.retailer.name}
           </p>
           <p className="text-lg mb-4 text-white dark:text-gray-100">Tipologia: {entry.type}</p>
           <p className="text-lg mb-4 text-white dark:text-gray-100">Pagante: {entry.payer}</p>

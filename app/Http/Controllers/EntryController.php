@@ -153,8 +153,9 @@ class EntryController extends Controller
       ->toArray();
 
     //$entri[0]['employee'] = $entri[0]['employee']['namesurname'];
-
-    $entri[0]['retailer'] = $entri[0]['retailer']['name'];
+    if ($entri[0]['retailer'] !== null) {
+      $entri[0]['retailer'] = $entri[0]['retailer']['name'];
+    }
     //dd($entri);
     //dd($land);
     // dd($sh[0]);
