@@ -177,10 +177,12 @@ class ShopController extends Controller
 
     $product->data = $request->data;
 
-    $product->land_id = $request->selectedLands[0]['id'];
-
-    $product->employee_id = $request->selectedEmployees[0]['id'];
-
+    if ($request->selectedLands[0] !== null) {
+      $product->land_id = $request->selectedLands[0]['id'];
+    }
+    if ($request->selectedEmployees[0] !== null) {
+      $product->employee_id = $request->selectedEmployees[0]['id'];
+    }
     $product->amount = $request->amount;
 
     $product->description = $request->description;
