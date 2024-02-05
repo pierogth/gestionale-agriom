@@ -82,6 +82,10 @@ class WorkController extends Controller
 
     $product->land_id = $request->where;
 
+    $land = Land::find($request->where);
+    $land->workhours += $request->workhours;
+    $land->save();
+
     $product->workhours = $request->workhours;
 
     $product->description = $request->description;
@@ -197,6 +201,12 @@ class WorkController extends Controller
     $land = Land::find($request->where);
 
     $product->land_id = $request->where;
+
+    //annullo precedents
+    $land->workhours -= $product->workhours;
+
+    $land->workhours += $request->workhours;
+    $land->save();
 
     $product->where = $land->name;
 
