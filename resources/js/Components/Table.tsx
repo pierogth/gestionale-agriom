@@ -57,7 +57,7 @@ const [dir, setDir] = useState(-1);
     
     const [items, setItems] = useState(props.data);
 
-    let myKeys = Object.keys(items[0]);
+    let myKeys = Object.keys(items[0]).slice(0,-1);
 
 
  
