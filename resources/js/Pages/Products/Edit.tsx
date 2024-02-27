@@ -191,7 +191,12 @@ export default function App({ product, products }) {
         </div>
 
             </div>
-            {typo === false ?
+            {typo === false ?<>
+            <label htmlFor="productSelect" className="block text-black-700 font-bold">
+
+            Scegli lo sfuso da cui scalare:
+
+          </label>
   <select
 
           id="productSelect"
@@ -212,7 +217,7 @@ export default function App({ product, products }) {
 
       ))}
 
-            </select> : ''}
+            </select> </>: ''}
             
             <div className="mb-5">
               <label htmlFor="name" className="block mb-2 text-sm font-medium text-black-600">Name</label>

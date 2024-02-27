@@ -28,7 +28,7 @@ const [dir, setDir] = useState(-1);
   const [currentPage, setCurrentPage] = useState(1);
 
   const [limit, setLimit] = useState(50);
-
+  console.log(props);
   const [myData, setMyData] = useState(props.data);
   const [sortedData, setSortedData] = useState([]);
 
@@ -45,6 +45,11 @@ const [dir, setDir] = useState(-1);
     setCurrentPage(1);
     filterOrderPaginate();
   }, [props.searchInput]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+    filterOrderPaginate();
+  }, []);
 
   const filterOrderPaginate = () => {
       let filter = filterData(props.searchInput, myData, props.columns);

@@ -10,10 +10,10 @@ import useRoute from '@/Hooks/useRoute';
 
 
 export default function Lands({ products, resource, route, addname }) {
-  console.log(resource)
+  console.log(products)
   //{console.log("------>>>>>"+Object.keys(products[0]).slice(0,-1))}
   const [columns, setColumns] = useState([]);
-    const [searchInput, setSearchInput] = useState('');
+    const [searchInput, setSearchInput] = useState(localStorage.getItem('search') ?? '');
 
    const [dataFilterOrderAndPaginate, setDataFilterOrderAndPaginate] = useState(
     products
@@ -29,12 +29,18 @@ const router = useRoute();
     }
   };
 
-  useEffect(() => {
+/*   useEffect(() => {
     console.log(products);
     setDataFilterOrderAndPaginate(products);
 
-  }, [products])
+  }, [products]) TOLTO PER LA MEMORIZZAZIONE DEL SEARCH INPUT, SEMBRA FUNGERE SENZA PROB*/
   
+  useEffect(() => {
+    
+    localStorage.removeItem('search');
+
+  }, [resource])
+
   return (
     <AppLayout
       title="Dashboard"
@@ -54,16 +60,17 @@ const router = useRoute();
 {/*             <Welcome />
  */}    
                 <input
-                    type="text"
-                    className={
-                      isFocused ? 'form-control focus--mouse' : 'form-control'
-                    }
-                    onFocus={toggleFocusLabel}
-                    onBlur={toggleBlurLabel}
-                    id="input-group-1"
-                    name="input-group-1"
-                    placeholder={'Ricerca'}
-                    onChange={e => setSearchInput(e.target.value)}
+              type="text"
+              className={
+                isFocused ? 'form-control focus--mouse' : 'form-control'
+              }
+              value={searchInput}
+              onFocus={toggleFocusLabel}
+              onBlur={toggleBlurLabel}
+              id="input-group-1"
+              name="input-group-1"
+              placeholder={'Ricerca'}
+              onChange={e => { setSearchInput(e.target.value); localStorage.setItem('search', e.target.value); }}
             />
             
            {products[0] ? <SortableTable columns={products && Object.keys(products[0]).slice(0,-1)}

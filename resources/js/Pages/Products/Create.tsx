@@ -193,7 +193,12 @@ export default function App({ products }) {
         </div>
 
             </div>
-            {typo === false ?
+            {typo === false ?<>
+            <label htmlFor="productSelect" className="block text-black-700 font-bold">
+
+            Scegli lo sfuso da cui scalare:
+
+          </label>
   <select
 
           id="productSelect"
@@ -204,7 +209,11 @@ export default function App({ products }) {
 
           className="w-full py-2 pl-3 pr-8 text-black-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 
-        >      {products.map((product) => (
+        >      <option key="placehold" value={null}>
+
+        {"Scegli "}
+
+      </option>{products.map((product) => (
 
         <option key={product.id} value={product.id}>
 
@@ -214,7 +223,7 @@ export default function App({ products }) {
 
       ))}
 
-            </select> : ''}
+            </select></>: ''}
             
             <div className="mb-5">
               <label htmlFor="name" className="block mb-2 text-sm font-medium text-black-600">Name</label>

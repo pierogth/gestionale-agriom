@@ -34,7 +34,7 @@ Route::middleware([
   'verified',
 ])->group(function () {
   Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Welcome');
   })->name('dashboard');
 
   Route::resource('products', App\Http\Controllers\ProductController::class);

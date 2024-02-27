@@ -17,7 +17,7 @@ export default function TableBody(props: PropsWithChildren<Props>) {
   const [items, setItems] = useState(props.data);
   console.log(props.data)
 const route = useRoute();
-  let myKeys = Object.keys(props.data[0]).slice(0,-1);
+  let myKeys = props.data[0] && Object.keys(props.data[0]).slice(0,-1);
   console.log(myKeys)
   return (
     <tbody style={{color:"lightgrey"}}>

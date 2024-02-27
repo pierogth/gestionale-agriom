@@ -46,7 +46,7 @@ class ProductController extends Controller
    */
   public function store(Request $request)
   {
-    //dd($request);
+ //   dd($request);
 
     //dd($request->input('name'));
     $request->validate([
@@ -102,6 +102,7 @@ class ProductController extends Controller
     }
 
     if ($request->input('selectedProduct') != '') {
+     
       $product->sfuso_id = (int) $request->input('selectedProduct');
       $sfuso = Product::find($request->input('selectedProduct'));
       $sfuso->quantity =
