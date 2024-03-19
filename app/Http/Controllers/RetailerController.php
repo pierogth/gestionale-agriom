@@ -22,6 +22,7 @@ class RetailerController extends Controller
       'place as Luogo',
       /*'type as Tipologia',*/
       'balance as Saldo',
+    //  'id as xxx'
     ])->get();
     return Inertia::render('Lands', [
       'products' => $products,

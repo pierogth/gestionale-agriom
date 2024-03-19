@@ -24,6 +24,7 @@ class EntryController extends Controller
       /* TODO prodotto/i */
       'payment_type as Tipo Pagamento',
       'data as Data',
+      //'id as xxx'
     ])->get();
     return Inertia::render('Lands', [
       'products' => $products,
@@ -62,7 +63,7 @@ class EntryController extends Controller
 
       'payer' => 'required|string',
 
-      'description' => 'required|string',
+      //'description' => 'string',
 
       'payment_type' => 'required|string',
 

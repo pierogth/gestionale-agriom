@@ -20,6 +20,7 @@ class ShopController extends Controller
       'type as Tipologia',
       'amount as €',
       'data as Data',
+   //   'id as xxx'
     ])->get();
     return Inertia::render('Lands', [
       'products' => $products,
@@ -54,7 +55,7 @@ class ShopController extends Controller
 
       'amount' => 'required|decimal:0,5',
 
-      'description' => 'required|string',
+      //'description' => 'string',
 
       'data' => 'required|date',
 
@@ -70,6 +71,11 @@ class ShopController extends Controller
     $product->land_id = $request->selectedLands[0]['id'];
 
     $product->employee_id = $request->selectedEmployees[0]['id'];
+
+    /*scalo credito al employee */
+    $employee=Employee::find($request->selectedEmployees[0]['id']);
+    $employee->credit -= $request->amount;
+    $employee->save();
 
     $product->amount = $request->amount;
 
@@ -182,6 +188,13 @@ class ShopController extends Controller
     }
     if ($request->selectedEmployees[0] !== null) {
       $product->employee_id = $request->selectedEmployees[0]['id'];
+      /*scalo credito al employee NON GESTITO IL CAMBIO COLLAB*/
+    $employee=Employee::find($request->selectedEmployees[0]['id']);
+    /*annullo scalo prec*/
+    $employee->credit += $product->amount;
+ /*attuo scalo att*/
+    $employee->credit -= $request->amount;
+    $employee->save();
     }
     $product->amount = $request->amount;
 

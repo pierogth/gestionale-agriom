@@ -5,7 +5,7 @@ import useRoute from '@/Hooks/useRoute';
 
 
 
-const Product = ({ product }) => {
+const Product = ({ product, category, um }) => {
 
     const route = useRoute();
 
@@ -55,9 +55,9 @@ const Product = ({ product }) => {
 
         <p className="text-lg mb-4 text-white dark:text-gray-100">{product.description}</p>
 
-        <p className="text-xl font-bold mb-2 text-white dark:text-gray-100">Quantità: {product.quantity} {product.um}</p>
+        <p className="text-xl font-bold mb-2 text-white dark:text-gray-100">Quantità: {product.quantity}{' '}{um}</p>
 
-        <p className="text-lg mb-4 text-white dark:text-gray-100">Categoria: {product.category}</p>
+        <p className="text-lg mb-4 text-white dark:text-gray-100">Categoria: {category}</p>
 
         <p className="text-lg mb-4 text-white dark:text-gray-100">Pezzi: {product.pieces}</p>
 

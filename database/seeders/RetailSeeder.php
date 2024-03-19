@@ -26,7 +26,7 @@ class RetailSeeder extends Seeder
             "balance" =>  -55,
         ]);
         Retailer::create([
-            "name" => "Tabacchi Dal Pappone",
+            "name" => "Tabacchi Da Vincenzo",
             "place" => "Noicattaro",
             "balance" =>  80,
         ]);

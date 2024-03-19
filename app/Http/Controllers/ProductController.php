@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\Um;
+
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
@@ -16,17 +19,34 @@ class ProductController extends Controller
   {
     $products = Product::select([
       'id',
+      'image as Immagine',
       'name as Nome',
       'quantity as Quantità',
-      'category as Categoria',
+      'category_id',
+      'type as Tipologia',
+      'um_id',
       'pieces as N°Pezzi',
+    ])->with('category', 'um')->get();
+
+    //dd($products);
+
+    $categories = Category::select([
+      'id',
+      'name'
+    ])->get();
+
+    $ums = Um::select([
+      'id',
+      'um'
     ])->get();
 
     return Inertia::render('Lands', [
       'products' => $products,
+      'categories' => $categories,
       'resource' => 'Magazzino',
       'addname' => 'Prodotto',
       'route' => 'products',
+      'umms'=>$ums
     ]);
     //dd($products);
   }
@@ -38,7 +58,9 @@ class ProductController extends Controller
   {
     //qua prendo i prodotti sfusi per la tendina
     $products = Product::where('type', 1)->get();
-    return Inertia::render('Products/Create', ['products' => $products]);
+    $categories = Category::all();
+    $ums = Um::all();
+    return Inertia::render('Products/Create', ['products' => $products, 'categories'=>$categories, 'ums'=>$ums]);
   }
 
   /**
@@ -54,9 +76,9 @@ class ProductController extends Controller
 
       'quantity' => 'required|numeric',
 
-      'um' => 'required|string|max:255',
+      //'um' => 'required|string|max:255',
 
-      'category' => 'required|string|max:255',
+      //'category_id' => 'required|numeric',
 
       //'pieces' => 'required|numeric',
 
@@ -75,9 +97,12 @@ class ProductController extends Controller
 
     $product->quantity = $request->quantity;
 
-    $product->um = $request->um;
+    //$product->um = $request->um;
 
-    $product->category = $request->category;
+    $product->um_id = $request->selectedUm[0]['id'];
+
+    $product->category_id = $request->selectedCategory[0]['id'];
+
 
     $product->pieces = $request->pieces;
 
@@ -123,9 +148,14 @@ class ProductController extends Controller
    * Display the specified resource.
    */
   public function show(Product $product)
-  {
+  {//dd($product);
+    $category = Category::find($product['category_id']);
+    $um = Um::find($product['um_id']);
+
     return Inertia::render('Products/Show', [
       'product' => $product,
+      'category' => $category->name,
+      'um' => $um->um
       /*   'resource' => 'Magazzino',
       'addname' => 'Prodotto',
       'route' => 'products', */
@@ -140,11 +170,22 @@ class ProductController extends Controller
     // dd($product->id);
 
     $editproduct = Product::find($product->id);
+    $categories = Category::all();
+    $selectedCategory = Category::find($product['category_id']);
+    $ums = Um::all();
+    $selectedUm = Um::find($product['um_id']);
+
+
+
     //qua prendo i prodotti sfusi per la tendina
     $products = Product::where('type', 1)->get();
     return Inertia::render('Products/Edit', [
       'product' => $editproduct,
       'products' => $products,
+      'categories' => $categories,
+      'selectCategory' => $selectedCategory,
+      'ums' => $ums,
+      'selectUm' => $selectedUm
     ]);
   }
 
@@ -161,9 +202,9 @@ class ProductController extends Controller
 
       'quantity' => 'required|numeric',
 
-      'um' => 'required|string|max:255',
+      //'um' => 'required|string|max:255',
 
-      'category' => 'required|string|max:255',
+      //'category' => 'required|string|max:255',
 
       //'pieces' => 'required|numeric',
 
@@ -201,9 +242,12 @@ class ProductController extends Controller
       // dd($sfuso);
     }
 
-    $product->um = $request->um;
+ //   $product->um = $request->um;
 
-    $product->category = $request->category;
+ $product->um_id = $request->selectedUm[0]['id'];
+
+  //  $product->category = $request->category;
+  $product->category_id = $request->selectedCategory[0]['id'];
 
     $product->quantity = $request->quantity;
 

@@ -16,6 +16,7 @@ interface Props {
   searchInput: string;
   setData: Function;
   actions: boolean;
+  initialData: any[];
 }
 
 export function SortableTable(props: PropsWithChildren<Props>) {
@@ -52,7 +53,7 @@ const [dir, setDir] = useState(-1);
   }, []);
 
   const filterOrderPaginate = () => {
-      let filter = filterData(props.searchInput, myData, props.columns);
+      let filter = filterData(props.searchInput, props.initialData, props.columns);
       console.log("AWEEEE------>>>>"+filter);
     let sorted = sortingData(filter, orderColumn, dir);
     setSortedData(sorted);
@@ -62,7 +63,7 @@ const [dir, setDir] = useState(-1);
     
     const [items, setItems] = useState(props.data);
 
-    let myKeys = Object.keys(items[0]).slice(0,-1);
+    let myKeys = Object.keys(items[0]);
 
 
  
@@ -79,6 +80,17 @@ const [dir, setDir] = useState(-1);
                     <thead className="border-b font-medium dark:border-neutral-500">
                                 <tr style={{color:"lightgrey"}}>
                                     {myKeys.map((key) => {
+                                      if(key==='category_id')
+                                      return <th scope="col" className="px-6 py-4"
+                                          onClick={() => { setOrderAndColumn(key); }}>{'Categoria'}</th>
+                                          if(key==='um_id')
+                                          return null;
+                                          if(key==='category')
+                                          return null;
+                                          if(key==='um')
+                                          return null;
+                                          if(key==='works')
+                                          return null;
                                         if(key!=='id')
                                         return <th scope="col" className="px-6 py-4"
                                             onClick={() => { setOrderAndColumn(key); }}>{key}</th>

@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UmController;
+
+
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\EntryController;
 
@@ -43,6 +47,26 @@ Route::middleware([
     'update',
   ])->name('products.update');
 
+  Route::post('/category/create', [
+    CategoryController::class,
+    'store',
+  ])->name('categories.create');
+
+  Route::post('/um/create', [
+    UmController::class,
+    'store',
+  ])->name('ums.create');
+
+  Route::post('/um/delete', [
+    UmController::class,
+    'destroy',
+  ])->name('ums.delete');
+
+  Route::post('/category/delete', [
+    CategoryController::class,
+    'destroy',
+  ])->name('categories.delete');
+
   Route::resource('lands', App\Http\Controllers\LandController::class);
   Route::resource('employees', App\Http\Controllers\EmployeeController::class);
   Route::resource('retailers', App\Http\Controllers\RetailerController::class);
@@ -56,3 +80,5 @@ Route::middleware([
   );
   Route::resource('works', App\Http\Controllers\WorkController::class);
 });
+
+//Route::resource('categories', App\Http\Controllers\CategoryController::class);

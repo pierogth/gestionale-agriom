@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
       EmployeeSeeder::class,
       EntrySeeder::class,
       LandSeeder::class,
+      UmSeeder::class,
+      CategorySeeder::class,
       ProductSeeder::class,
       RetailSeeder::class,
       ShopSeeder::class,

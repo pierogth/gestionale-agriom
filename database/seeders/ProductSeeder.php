@@ -18,8 +18,9 @@ class ProductSeeder extends Seeder
     Product::create([
       'name' => 'Olio EVO',
       'quantity' => 50,
-      'um' => 'Litri',
-      'category' => 'Oli',
+      //'um' => 'Litri',
+      'category_id' => 1,
+      'um_id' => 1,
       //  "pieces" => 3,
       'lot' => 'OlioBuono2023',
       'type' => 1,
@@ -27,8 +28,11 @@ class ProductSeeder extends Seeder
     Product::create([
       'name' => 'Mandorle',
       'quantity' => 50,
-      'um' => 'Kg',
-      'category' => 'Frutta',
+     // 'um' => 'Kg',
+      //'category' => 'Frutta',
+      'category_id' => 1,
+      'um_id' => 1,
+
       //  "pieces" => 3,
       'lot' => 'Mandorlaje2023',
       'type' => 1,
@@ -36,8 +40,11 @@ class ProductSeeder extends Seeder
     Product::create([
       'name' => 'Lupini',
       'quantity' => 50,
-      'um' => 'Kg',
-      'category' => 'Legumi',
+    //  'um' => 'Kg',
+      //'category' => 'Legumi',
+      'category_id' => 1,
+      'um_id' => 1,
+
       //"pieces" => 3,
       'lot' => 'OlioBuono2023',
       'type' => 1,
@@ -46,8 +53,11 @@ class ProductSeeder extends Seeder
     Product::create([
       'name' => '5L Olio EVO',
       'quantity' => 5,
-      'um' => 'Litri',
-      'category' => 'Oli',
+    //  'um' => 'Litri',
+      //'category' => 'Oli',
+      'category_id' => 1,
+      'um_id' => 1,
+
       'sfuso_id' => 1,
       //  "pieces" => 3,
       'lot' => 'OlioBuono2023',
@@ -56,8 +66,11 @@ class ProductSeeder extends Seeder
     Product::create([
       'name' => 'Confezione 300g Mandorle',
       'quantity' => 0.3,
-      'um' => 'Kg',
-      'category' => 'Frutta',
+    //  'um' => 'Kg',
+      //'category' => 'Frutta',
+      'category_id' => 1,
+      'um_id' => 1,
+
       'sfuso_id' => 2,
       //  "pieces" => 3,
       'lot' => 'Mandorlaje2023',
@@ -66,8 +79,11 @@ class ProductSeeder extends Seeder
     Product::create([
       'name' => 'Confezione 100g Lupini',
       'quantity' => 0.1,
-      'um' => 'Kg',
-      'category' => 'Legumi',
+    //  'um' => 'Kg',
+      //'category' => 'Legumi',
+      'category_id' => 1,
+      'um_id' => 1,
+
       'sfuso_id' => 3,
       //"pieces" => 3,
       'lot' => 'Lupin98',

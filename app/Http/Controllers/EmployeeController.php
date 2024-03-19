@@ -21,6 +21,7 @@ class EmployeeController extends Controller
       'shops as Spese',
       'workhours as N°ore Lavoro',
       'ehour as €-ora',
+      //'id as xxx'
     ])->get();
     return Inertia::render('Lands', [
       'products' => $products,

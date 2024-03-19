@@ -18,6 +18,7 @@ return new class extends Migration {
         ->nullable()
         ->constrained();
       $table->text('description')->nullable();
+      //$table->text('tipology')->nullable();
       /* pivot per employee e nro ore di lavoro */
       $table->double('ehour');
       $table->double('workhours');

@@ -10,7 +10,9 @@ use App\Models\EmployeeLand;
 use App\Models\Employee;
 use App\Models\Land;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
+
 
 class WorkController extends Controller
 {
@@ -19,13 +21,16 @@ class WorkController extends Controller
    */
   public function index()
   {
-    $products = Work::select([
-      'id',
-      'where as Dove',
-      /* TODO collaboratore/i */
-      /* TODO ore di lavoro */
-      'ehour as €-ora',
-      'data as Data',
+    $products = Work::select([DB::raw('
+      id,
+      `where` as Dove,
+      description as `Che Cosa`,
+      workhours as Ore,
+      ehour as `€-ora`,
+      (workhours * ehour) as `€-TOT`,
+      data as Data,
+      updated_at as `Ultima Modifica`
+')
     ])->get();
     return Inertia::render('Lands', [
       'products' => $products,
@@ -63,7 +68,7 @@ class WorkController extends Controller
 
       'workhours' => 'required|decimal:0,5',
 
-      'description' => 'required|string',
+      //'description' => 'string',
 
       'data' => 'required|date',
 
@@ -189,7 +194,7 @@ class WorkController extends Controller
 
       'workhours' => 'required|decimal:0,5',
 
-      'description' => 'required|string',
+      //'description' => 'string',
 
       'data' => 'required|date',
 

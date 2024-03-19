@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, router } from '@inertiajs/react';
 import useRoute from '@/Hooks/useRoute';
+import CategoryForm from './CategoryForm';
+import UmForm from './UmForm';
 
-export default function App({ product, products }) {
+
+export default function App({ product, products, categories, selectCategory, ums, selectUm }) {
 
   
   const [typo, setTypo] = useState(product.type===1);
   const [errors, setErrors] = useState({});
   const [selectedProduct, setSelectedProduct] = useState(product.sfuso_id);
+  const [selectedCategory, setSelectedCategory] = useState([selectCategory]);
+  const [selectedUm, setSelectedUm] = useState([selectUm]);
+  const [readOnlyUm, setReadOnlyUm] = useState(false);
+
 
    const [formData, setFormData] = useState({
      name: product.name,
@@ -42,6 +49,35 @@ export default function App({ product, products }) {
       console.log(formData);
    }, [typo]);
   
+
+   useEffect(() => {
+    handleSelectCategory();
+     form.setData(formData)
+     console.log(formData);
+ }, [selectedCategory]);
+
+ const handleSelectCategory = () => {
+
+   setFormData((prevProps) => ({
+     ...prevProps,
+     selectedCategory: selectedCategory,
+   }));
+ }
+
+
+ useEffect(() => {
+  handleSelectUm();
+   form.setData(formData)
+   console.log(formData);
+}, [selectedUm]);
+
+const handleSelectUm = () => {
+
+ setFormData((prevProps) => ({
+   ...prevProps,
+   selectedUm: selectedUm,
+ }));
+}
    const handleTypoProduct = () => {
  
     setFormData((prevProps) => ({
@@ -64,13 +100,21 @@ export default function App({ product, products }) {
     }));
  };
   
-  const handleSelectProduct = () => {
- 
-    setFormData((prevProps) => ({
-      ...prevProps,
-     selectedProduct: selectedProduct,
-    }));
- };
+ const handleSelectProduct = () => {
+  console.log(selectedProduct)
+  console.log(products)
+  if(selectedProduct && selectedProduct.length>0){
+  let myprod = products.filter((prod: { id: string; })=>{if(prod.id == selectedProduct) return prod;})
+  console.log(myprod)
+  let myum = ums.filter((um: { id: any; })=>{if(myprod[0].um_id == um.id) return um;})
+  console.log(myum)
+  setSelectedUm(myum)
+  setReadOnlyUm(true)}
+  setFormData((prevProps) => ({
+    ...prevProps,
+   selectedProduct: selectedProduct,
+  }));
+};
 
   const handleImageChange = (event) => {
 
@@ -207,7 +251,13 @@ export default function App({ product, products }) {
 
           className="w-full py-2 pl-3 pr-8 text-black-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 
-        >      {products.map((product) => (
+        >  
+        <option key={999} value={'null'}>
+
+{"scegli prodotto sfuso"}
+
+</option>
+            {products.map((product) => (
 
         <option key={product.id} value={product.id}>
 
@@ -241,7 +291,7 @@ export default function App({ product, products }) {
              />
              {errors.quantity !== null ? <small style={{color:"red"}}>{errors.quantity}</small>: ''}
             </div>
-                     {/* ... include the other fields in a similar manner ... */}
+                     {/* ... include the other fields in a similar manner ... 
                          <div className="mb-5">
               <label htmlFor="um" className="block mb-2 text-sm font-medium text-black-600">Unità di misura</label>
               <input
@@ -252,18 +302,11 @@ export default function App({ product, products }) {
                 className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
               />
           {errors.um !== null ? <small style={{color:"red"}}>{errors.um}</small>: ''}
-                     </div>
-                         <div className="mb-5">
-              <label htmlFor="category" className="block mb-2 text-sm font-medium text-black-600">Categoria</label>
-              <input
-                type="text"
-                name="category"
-                value={formData.category}
-                onChange={handleInputChange}
-                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-             />
-             {errors.category !== null ? <small style={{color:"red"}}>{errors.category}</small>: ''}
-                     </div>
+                     </div>*/}
+                                          <UmForm products={ums} selectedProducts={selectedUm} setSelectedProducts={setSelectedUm} isReadOnly={readOnlyUm}></UmForm>
+
+                     <CategoryForm products={categories} selectedProducts={selectedCategory} setSelectedProducts={setSelectedCategory}></CategoryForm>
+
                          <div className="mb-5">
               <label htmlFor="pieces" className="block mb-2 text-sm font-medium text-black-600">Numero pezzi</label>
               <input

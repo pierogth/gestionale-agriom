@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, router } from '@inertiajs/react';
 import useRoute from '@/Hooks/useRoute';
+import CategoryForm from './CategoryForm';
+import UmForm from './UmForm';
 
-export default function App({ products }) {
+export default function App({ products, categories, ums }) {
 
   
   const [typo, setTypo] = useState(true);
   const [errors, setErrors] = useState({});
   const [selectedProduct, setSelectedProduct] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState([]);
+  const [selectedUm, setSelectedUm] = useState([]);
+    const [readOnlyUm, setReadOnlyUm] = useState(false);
+
+
+
 
    const [formData, setFormData] = useState({
      name: '',
@@ -41,6 +49,34 @@ export default function App({ products }) {
       form.setData(formData)
       console.log(formData);
   }, [selectedProduct]);
+
+  useEffect(() => {
+    handleSelectCategory();
+     form.setData(formData)
+     console.log(formData);
+ }, [selectedCategory]);
+
+ useEffect(() => {
+  handleSelectUm();
+   form.setData(formData)
+   console.log(formData);
+}, [selectedUm]);
+
+const handleSelectUm = () => {
+  console.log(selectedUm)
+  setFormData((prevProps) => ({
+    ...prevProps,
+    selectedUm: selectedUm,
+  }));
+}
+
+ const handleSelectCategory = () => {
+
+   setFormData((prevProps) => ({
+     ...prevProps,
+     selectedCategory: selectedCategory,
+   }));
+ }
   
   
   const route = useRoute();
@@ -67,7 +103,15 @@ export default function App({ products }) {
  };
   
   const handleSelectProduct = () => {
- 
+    console.log(selectedProduct)
+    console.log(products)
+    if(selectedProduct.length>0){
+    let myprod = products.filter((prod: { id: string; })=>{if(prod.id == selectedProduct) return prod;})
+    console.log(myprod)
+    let myum = ums.filter((um: { id: any; })=>{if(myprod[0].um_id == um.id) return um;})
+    console.log(myum)
+    setSelectedUm(myum)
+    setReadOnlyUm(true)}
     setFormData((prevProps) => ({
       ...prevProps,
      selectedProduct: selectedProduct,
@@ -247,7 +291,7 @@ export default function App({ products }) {
              />
              {errors.quantity !== null ? <small style={{color:"red"}}>{errors.quantity}</small>: ''}
             </div>
-                     {/* ... include the other fields in a similar manner ... */}
+                     {/* ... include the other fields in a similar manner ... 
                          <div className="mb-5">
               <label htmlFor="um" className="block mb-2 text-sm font-medium text-black-600">Unità di misura</label>
               <input
@@ -258,18 +302,12 @@ export default function App({ products }) {
                 className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
               />
           {errors.um !== null ? <small style={{color:"red"}}>{errors.um}</small>: ''}
-                     </div>
-                         <div className="mb-5">
-              <label htmlFor="category" className="block mb-2 text-sm font-medium text-black-600">Categoria</label>
-              <input
-                type="text"
-                name="category"
-                value={formData.category}
-                onChange={handleInputChange}
-                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-             />
-             {errors.category !== null ? <small style={{color:"red"}}>{errors.category}</small>: ''}
-                     </div>
+                     </div>*/}
+
+                     <UmForm products={ums} selectedProducts={selectedUm} setSelectedProducts={setSelectedUm} isReadOnly={readOnlyUm}></UmForm>
+
+    <CategoryForm products={categories} selectedProducts={selectedCategory} setSelectedProducts={setSelectedCategory}></CategoryForm>
+
                          <div className="mb-5">
               <label htmlFor="pieces" className="block mb-2 text-sm font-medium text-black-600">Numero pezzi</label>
               <input

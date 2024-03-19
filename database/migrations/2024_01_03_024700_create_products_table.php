@@ -14,8 +14,14 @@ return new class extends Migration {
       $table->id();
       $table->string('name');
       $table->double('quantity');
-      $table->string('um');
-      $table->string('category');
+      $table
+        ->foreignId('um_id')
+        ->nullable()
+        ->constrained();
+      $table
+        ->foreignId('category_id')
+        ->nullable()
+        ->constrained();
       $table->integer('pieces')->nullable();
       $table->string('lot');
       $table->text('description')->nullable();
