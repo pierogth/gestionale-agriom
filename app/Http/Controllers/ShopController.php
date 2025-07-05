@@ -17,7 +17,7 @@ class ShopController extends Controller
   {
     $products = Shop::select([
       'id',
-      'type as Tipologia',
+      'type as Tipo spesa',
       'amount as €',
       'data as Data',
    //   'id as xxx'

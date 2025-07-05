@@ -5,3 +5,8 @@
 [x-cloak] {
     display: none;
 }
+
+text {
+    color: white !important;
+    fill: white !important;
+}

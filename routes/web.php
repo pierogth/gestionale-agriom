@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UmController;
+use App\Http\Controllers\BalanceController;
 
 
 use App\Http\Controllers\ShopController;
@@ -40,6 +41,14 @@ Route::middleware([
   Route::get('/dashboard', function () {
     return Inertia::render('Welcome');
   })->name('dashboard');
+
+  Route::get('/provola', function () {
+    return Inertia::render('Provola');
+  })->name('provola');
+
+  Route::get('/provolo', function () {
+    return Inertia::render('Provolo');
+  })->name('provolo');
 
   Route::resource('products', App\Http\Controllers\ProductController::class);
   Route::post('/products/{product}', [
@@ -79,6 +88,10 @@ Route::middleware([
     'entries.update'
   );
   Route::resource('works', App\Http\Controllers\WorkController::class);
+
+  Route::get('/balance', [BalanceController::class, 'index'])->name(
+    'balance.index'
+  );
 });
 
 //Route::resource('categories', App\Http\Controllers\CategoryController::class);

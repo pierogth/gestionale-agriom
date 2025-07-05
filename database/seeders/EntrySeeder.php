@@ -21,6 +21,7 @@ class EntrySeeder extends Seeder
             "payer" => "Lino",
             "payment_type" => "Contanti",
             "data" => '2023-05-13',
+            "type" => 0
 
         ]);
         Entry::create([
@@ -28,6 +29,7 @@ class EntrySeeder extends Seeder
             "is_payed" =>0,
             "payer" => "Orazio",
             "data" => '2023-05-13',
+            "type" => 1
 
         ]);
         Entry::create([
@@ -36,6 +38,7 @@ class EntrySeeder extends Seeder
             "payer" => "Livio",
             "payment_type" => "Bonifico",
             "data" => '2023-05-18',
+            "type" => 2
 
         ]);
     }
