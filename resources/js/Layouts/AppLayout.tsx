@@ -342,12 +342,12 @@ export default function AppLayout({
               >
                 Collaboratori
               </ResponsiveNavLink>
-              {/*   <ResponsiveNavLink
+             <ResponsiveNavLink
                 href={route('')}
-                active={route().current('')}
+                active={route().current('balance.index')}
               >
                 Bilancio
-              </ResponsiveNavLink> */}
+              </ResponsiveNavLink> 
                 <ResponsiveNavLink
                 href={route('retailers.index')}
                 active={route().current('retailers.index')}
