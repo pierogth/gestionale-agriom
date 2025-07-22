@@ -343,7 +343,7 @@ export default function AppLayout({
                 Collaboratori
               </ResponsiveNavLink>
              <ResponsiveNavLink
-                href={route('')}
+                href={route('balance.index')}
                 active={route().current('balance.index')}
               >
                 Bilancio
