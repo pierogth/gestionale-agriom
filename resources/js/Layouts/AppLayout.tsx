@@ -85,11 +85,10 @@ export default function AppLayout({
                     Collaboratori
                   </NavLink>
                       <NavLink
-                    href={"#"}
-                    
-                    active={route().current('dashboard')}
+                    href={route('balance.index')}
+                    active={route().current('balance.index')}
                   >
-                    <button onClick={()=>alert('tempo al tempo...')}>Bilancio</button>
+                   Bilancio
                   </NavLink>
                       <NavLink
                     href={route('retailers.index')}

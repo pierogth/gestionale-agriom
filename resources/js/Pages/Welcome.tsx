@@ -57,7 +57,7 @@ export default function Welcome({
       <DashboardSquare title="Magazzino" href={route('products.index')} />
       <DashboardSquare title="Terreni" href={route('lands.index')} />
       <DashboardSquare title="Collaboratori" href={route('employees.index')} />
-      <DashboardSquare title="Bilancio" href={route('dashboard')} />
+      <DashboardSquare title="Bilancio" href={route('balance.index')} />
       <DashboardSquare title="Rivenditori" href={route('retailers.index')} />
       <DashboardSquare title="Spese" href={route('shops.index')} />
       <DashboardSquare title="Entrate" href={route('entries.index')} />
