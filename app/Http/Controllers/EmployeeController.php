@@ -51,13 +51,13 @@ class EmployeeController extends Controller
 
       'category' => 'required|string',
 
-      'credit' => 'required|decimal:0,5',
+     // 'credit' => 'required|decimal:0,5',
 
-      'shops' => 'required|decimal:0,5',
+     // 'shops' => 'required|decimal:0,5',
 
-      'workhours' => 'required|decimal:0,5',
+     // 'workhours' => 'required|decimal:0,5',
 
-      'ehours' => 'required|decimal:0,5',
+     // 'ehours' => 'required|decimal:0,5',
     ]);
 
     $product = new Employee();

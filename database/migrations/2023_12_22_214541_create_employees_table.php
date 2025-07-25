@@ -14,11 +14,11 @@ return new class extends Migration {
       $table->id();
       $table->string('namesurname');
       $table->string('category');
-      $table->double('credit');
-      $table->double('shops');
-      $table->double('workhours');
+      $table->double('credit')->nullable();
+      $table->double('shops')->nullable();
+      $table->double('workhours')->nullable();
       /* chiave referenziale workplaces su lands */
-      $table->double('ehour');
+      $table->double('ehour')->nullable();
       /* acconti conviene creare la pivot */
       $table->timestamps();
     });
